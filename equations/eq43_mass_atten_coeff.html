@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Equation 43: Mass Attenuation Coefficient (Mixture)</title>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+  </script>
+  <style>
+    body { font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; margin: 40px; color: #111; }
+    .equation { background: #f8f8f8; padding: 16px; border-radius: 6px; display: inline-block; }
+    h1 { font-size: 1.25rem; margin-bottom: 0.25rem; }
+    h2 { font-size: 1rem; margin-top: 1.25rem; }
+    ul { margin-top: 0.25rem; }
+  </style>
+</head>
+<body>
+  <h1>Equation 43: Mass Attenuation Coefficient (Mixture)</h1>
+  <h2>Equation:</h2>
+  <div class="equation">\[\frac{\mu}{\rho} = \frac{1}{100} \sum_{i=1}^{n} \omega_i \left(\frac{\mu}{\rho}\right)_i \quad \left[\frac{\text{cm}^2}{\text{g}}\right]\]</div>
+  <h2>Variables:</h2>
+  <ul>
+    <li>\(\mu/\rho\): Mass attenuation coefficient of mixture [cm<sup>2</sup>/g]</li>
+    <li>\(\omega_i\): Weight percent of component i [%]</li>
+    <li>\((\mu/\rho)_i\): Mass attenuation coefficient of component i [cm<sup>2</sup>/g]</li>
+    <li>\(n\): Number of components [-]</li>
+  </ul>
+  <h2>Description:</h2>
+  <p>Mixture rule for calculating mass attenuation coefficients from constituent materials weighted by their mass fractions. The factor of 1/100 converts weight percent to weight fraction.</p>
+</body>
+</html>

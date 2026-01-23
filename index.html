@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>iRDC: The Interactive Reference Data Card</title>
+    <style>
+        /* Page styling */
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-width: 100%;
+            margin: 0;
+            padding: 20px;
+        }
+
+        /* Container styling */
+        #rdcContainer {
+            display: flex;
+            justify-content: center;
+            max-width: 100%;
+            overflow-x: auto;
+        }
+
+        /* Popup styling */
+        #equationPopup {
+            display: none;
+            position: absolute;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            padding: 20px;
+            z-index: 1000;
+            min-width: 300px;
+            max-width: 600px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+            border-radius: 4px;
+            overflow-x: auto;
+        }
+
+        #latexContent {
+            font-size: 16px;
+            line-height: 1.5;
+        }
+
+        #latexContent .equation {
+            padding: 15px;
+            margin: 10px 0;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+            overflow-x: auto;
+        }
+
+        #latexContent h1 {
+            font-size: 1.2em;
+            margin: 0 0 15px 0;
+        }
+
+        #latexContent h2 {
+            font-size: 1.1em;
+            margin: 15px 0 8px 0;
+        }
+
+        #latexContent ul {
+            margin: 8px 0;
+            padding-left: 25px;
+        }
+
+        #latexContent li {
+            margin: 4px 0;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            cursor: pointer;
+            font-size: 14px;
+            color: #e74c3c;
+            transition: color 0.3s ease;
+            padding: 5px;
+        }
+
+        .close-btn:hover {
+            color: #c0392b;
+        }
+
+        .warning {
+            color: #e74c3c;
+            font-weight: bold;
+            text-align: center;
+        }
+    </style>
+    <!-- MathJax for rendering LaTeX -->
+    <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+
+<body>
+    <h1>iRDC: The Interactive Reference Data Card</h1>
+    <h3 class="warning">YOU WILL NOT HAVE THIS VERSION OF THE RDC ON ANY EXAM</h3>
+
+    <!-- Container for the SVG -->
+    <div id="rdcContainer"></div>
+    <p>
+        The iRDC was created thanks to MAJ Filip's inspiration with the PH2X1 iPRC (thanks Kevin).<br>
+        To suggest additional improvements email: <a href="mailto:dave.pert@westpoint.edu">dave.pert@westpoint.edu</a>
+    </p>
+    <!-- Popup for displaying LaTeX equations -->
+    <div id="equationPopup">
+        <span class="close-btn" onclick="closePopup()">Close X</span>
+        <div id="latexContent"></div>
+    </div>
+
+    <script>
+        // Function to load and display LaTeX content
+        function loadContent(filename, event, column) {
+            fetch(filename)
+                .then(response => response.text())
+                .then(content => {
+                    showPopup(content, event, column);
+                })
+                .catch(err => console.error('Error loading content:', err));
+        }
+
+        // Function to show the popup
+        function showPopup(content, event, column) {
+            var popup = document.getElementById('equationPopup');
+            var latexContainer = document.getElementById('latexContent');
+
+            // Set the content
+            latexContainer.innerHTML = content;
+            popup.style.display = 'block';
+            var offset_y = 30;
+
+            // First position the popup
+            popup.style.top = (event.pageY + offset_y) + 'px';
+            
+            // Calculate available space
+            const viewportWidth = window.innerWidth;
+            const clickX = event.pageX;
+            
+            if (column === "left" || column === "middle") {
+                // For left/middle columns, try to position right of click
+                const rightSpace = viewportWidth - clickX;
+                if (rightSpace >= 650) { // enough space to the right
+                    popup.style.left = (clickX + 20) + 'px';
+                } else { // position to the left
+                    popup.style.left = Math.max(20, clickX - 620) + 'px';
+                }
+            } else {
+                // For right column always position more to the left
+                popup.style.left = Math.max(20, viewportWidth / 2.5 - 300) + 'px';
+            }
+            
+            // Ensure popup is fully visible
+            setTimeout(() => {
+                const rect = popup.getBoundingClientRect();
+                if (rect.right > viewportWidth) {
+                    popup.style.left = (viewportWidth - rect.width - 20) + 'px';
+                }
+                if (rect.left < 0) {
+                    popup.style.left = '20px';
+                }
+            }, 0);
+
+
+            // Position the popup
+
+
+            // Render LaTeX
+            MathJax.typesetPromise();
+        }
+
+        // Function to close the popup
+        function closePopup() {
+            document.getElementById('equationPopup').style.display = 'none';
+        }
+        // Function to initialize rectangle attributes
+        function initializeRectangle(area) {
+            area.style.fill = 'transparent'; // Original state
+            area.style.stroke = 'none';
+            area.style.cursor = 'pointer';                  // Optional: change cursor on hover
+        }
+        // Functions to handle hover effects
+        function addHoverEffect(area) {
+            area.style.fill = 'rgba(255, 215, 0, 0.25)'; // Gold with transparency
+            //area.style.stroke = 'black';
+            //area.style.strokeWidth = '2px';
+        }
+
+        function removeHoverEffect(area) {
+            area.style.fill = 'transparent'; // Original state
+            area.style.stroke = 'none';
+        }
+        function initializeClickableArea(svgElement, areaId, contentUrl, column) {
+            var clickableArea = svgElement.getElementById(areaId);
+            console.log('Initializing clickable area:', areaId, clickableArea);
+            if (clickableArea) {
+                initializeRectangle(clickableArea);
+                clickableArea.addEventListener('click', function (event) {
+                    loadContent(contentUrl, event, column);
+                });
+                clickableArea.addEventListener('mouseover', function () {
+                    addHoverEffect(clickableArea);
+                });
+                clickableArea.addEventListener('mouseout', function () {
+                    removeHoverEffect(clickableArea);
+                });
+            } else {
+                console.warn('Clickable area ' + areaId + ' not found in SVG.');
+            }
+        }
+        // Fetch and embed the SVG
+        fetch('NE450_RDC_both.svg')
+            .then(response => response.text())
+            .then(svgText => {
+                // Insert SVG into the DOM
+                document.getElementById('rdcContainer').innerHTML = svgText;
+
+                // Get the SVG element
+                const svgElement = document.getElementById('rdcContainer').querySelector('svg');
+
+                // Ensure SVG is properly namespaced
+                if (!svgElement) {
+                    console.error('SVG element not found in container');
+                    return;
+                }
+                initializeClickableArea(svgElement,'prc-1','equations/eq01_swu.html','left');
+		initializeClickableArea(svgElement,'prc-2-1','equations/eq02-1_feed_factor.html','left');
+		initializeClickableArea(svgElement,'prc-2-2','equations/eq02-2_waste_factor.html','left');
+		initializeClickableArea(svgElement,'prc-3','equations/eq03_separation_potential.html','left');
+		initializeClickableArea(svgElement,'prc-4','equations/eq04_num_stages.html','left');
+		initializeClickableArea(svgElement,'prc-5','equations/eq05_gaseous_diffusion_alpha.html','left');
+		initializeClickableArea(svgElement,'prc-6','equations/eq06_centrifuge_alpha.html','left');
+		initializeClickableArea(svgElement,'prc-7','equations/eq07_multiplication_factor.html','left');
+		initializeClickableArea(svgElement,'prc-8','equations/eq08_neutron_lifetime.html','left');
+		initializeClickableArea(svgElement,'prc-9','equations/eq09_bomb_alpha.html','left');
+		initializeClickableArea(svgElement,'prc-10-1','equations/eq10-1_neutron_population.html','left');
+		initializeClickableArea(svgElement,'prc-10-2','equations/eq10-2_fission_yield.html','left');
+		initializeClickableArea(svgElement,'prc-11','equations/eq11_expansion_velocity.html','left');
+		initializeClickableArea(svgElement,'prc-12','equations/eq12_adjusted_xs.html','left');
+		initializeClickableArea(svgElement,'prc-13','equations/eq13_fusion_yield.html','left');
+		initializeClickableArea(svgElement,'prc-14','equations/eq14_fusion_yield_sphere.html','left');
+		initializeClickableArea(svgElement,'prc-15-1','equations/eq15-1_reaction_rate_density.html','left');
+		initializeClickableArea(svgElement,'prc-15-2','equations/eq15-2_fusion_atoms.html','left');
+		initializeClickableArea(svgElement,'prc-16','equations/eq16_dd_reactivity.html','left');
+		initializeClickableArea(svgElement,'prc-17','equations/eq17_dt_reactivity.html','left');
+		initializeClickableArea(svgElement,'prc-18','equations/eq18_burn_radius.html','left');
+		initializeClickableArea(svgElement,'prc-19','equations/eq19_xray_spectrum.html','right');
+		initializeClickableArea(svgElement,'prc-20-1','equations/eq20-1_xray_fluence.html','right');
+		initializeClickableArea(svgElement,'prc-20-2','equations/eq20-2_xray_yield.html','right');
+		initializeClickableArea(svgElement,'prc-21','equations/eq21_planck_integral.html','right');
+		initializeClickableArea(svgElement,'prc-22','equations/eq22_xray_deposition.html','right');
+		initializeClickableArea(svgElement,'prc-23','equations/eq23_xray_pressure.html','right');
+		initializeClickableArea(svgElement,'prc-24','equations/eq24_fireball_radius.html','right');
+		initializeClickableArea(svgElement,'prc-25-1','equations/eq25_max_thermal_power_low.html','right');
+		initializeClickableArea(svgElement,'prc-25-2','equations/eq25_time_max_thermal_low.html','right');
+		initializeClickableArea(svgElement,'prc-26-1','equations/eq26_max_thermal_power_high.html','right');
+		initializeClickableArea(svgElement,'prc-26-2','equations/eq26_time_max_thermal_high.html','right');
+		initializeClickableArea(svgElement,'prc-27','equations/eq27_total_thermal_energy.html','right');
+		initializeClickableArea(svgElement,'prc-28','equations/eq28_thermal_fluence_cm.html','right');
+		initializeClickableArea(svgElement,'prc-29','equations/eq29_thermal_fluence_kft.html','right');
+		initializeClickableArea(svgElement,'prc-30','equations/eq30_thermal_fluence_miles.html','right');
+		initializeClickableArea(svgElement,'prc-31','equations/eq31_slant_range_cube_scaling.html','right');
+		initializeClickableArea(svgElement,'prc-32','equations/eq32_distance_time_height_cube_scaling.html','right');
+		initializeClickableArea(svgElement,'prc-33','equations/eq33_altitude_scaling_factors.html','right');
+		initializeClickableArea(svgElement,'prc-34','equations/eq34_altitude_scaling.html','right');
+		initializeClickableArea(svgElement,'prc-35','equations/eq35_crater_scaling.html','right');
+		initializeClickableArea(svgElement,'prc-36','equations/eq36_crater_volume.html','right');
+		initializeClickableArea(svgElement,'prc-37','equations/eq37_crater_dimensions.html','right');
+		initializeClickableArea(svgElement,'prc-38-1','equations/eq38-1_initial_dose.html','left');
+		initializeClickableArea(svgElement,'prc-38-2','equations/eq38-2_dose_equivalent.html','left');
+		initializeClickableArea(svgElement,'prc-39','equations/eq39_residual_dose_rate.html','left');
+		initializeClickableArea(svgElement,'prc-40','equations/eq40_accumulated_dose.html','left');
+		initializeClickableArea(svgElement,'prc-41','equations/eq41_dose_equivalent.html','left');
+		initializeClickableArea(svgElement,'prc-42','equations/eq42_photon_attenuation.html','left');
+		initializeClickableArea(svgElement,'prc-43','equations/eq43_mass_atten_coeff.html','left');
+		initializeClickableArea(svgElement,'prc-44-1','equations/eq44-1_linear_attn_coef.html','left');
+		initializeClickableArea(svgElement,'prc-44-2','equations/eq44-2_mean_free_path.html','left');
+		initializeClickableArea(svgElement,'prc-45-1','equations/eq45-1_number_density.html','left');
+		initializeClickableArea(svgElement,'prc-45-2','equations/eq45-2_macro_xs.html','left');
+            })
+            .catch(err => console.error('Error loading SVG:', err));
+
+    </script>
+    <h3 class="warning">YOU WILL NOT HAVE THIS VERSION OF THE RDC ON ANY EXAM</h3>
+</body>
+
+
+</html>
+

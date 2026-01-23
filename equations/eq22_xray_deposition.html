@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Equation 22: Energy Deposition</title>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+  </script>
+  <style>
+    body { font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; margin: 40px; color: #111; }
+    .equation { background: #f8f8f8; padding: 16px; border-radius: 6px; display: inline-block; }
+    h1 { font-size: 1.25rem; margin-bottom: 0.25rem; }
+    h2 { font-size: 1rem; margin-top: 1.25rem; }
+    ul { margin-top: 0.25rem; }
+  </style>
+</head>
+<body>
+  <h1>Equation 22: Energy Deposition</h1>
+  <h2>Equation:</h2>
+  <div class="equation">\[E_{dep}(x) = \sum_{g=1}^{G} \left[P_g F_0 e^{-\mu_g x} \left(\frac{\mu_a}{\rho}\right)_g\right]\]</div>
+  <h2>Variables:</h2>
+  <ul>
+    <li>\(E_{dep}(x)\): Energy deposited per unit mass at depth x [J/kg]</li>
+    <li>\(G\): Total number of energy groups [-]</li>
+    <li>\(P_g\): Fraction of incident energy in group g [-]</li>
+    <li>\(F_0\): Incident fluence [J/m<sup>2</sup>]</li>
+    <li>\(\mu_g\): Total attenuation coefficient for group g [m<sup>-1</sup>]</li>
+    <li>\(x\): Depth [m]</li>
+    <li>\((\mu_a/\rho)_g\): Mass absorption coefficient for group g [m<sup>2</sup>/kg]</li>
+  </ul>
+  <h2>Description:</h2>
+  <p>Multi-group calculation of energy deposited in a material by X-rays as a function of depth, accounting for exponential attenuation in each energy group.</p>
+</body>
+</html>
