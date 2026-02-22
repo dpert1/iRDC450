@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Equation 26: Thermal Pulse (Altitude Corrected)</title>
+  <title>Equation 26-1: Max Thermal Power above 15,000 ft</title>
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script id="MathJax-script" async
     src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
@@ -17,19 +17,17 @@
   </style>
 </head>
 <body>
-  <h1>Equation 26: Thermal Pulse (Altitude Corrected)</h1>
+  <h1>Equation 26-1: Max Thermal Power above 15,000 ft</h1>
   <h2>Equations:</h2>
   <div class="equation">\[P_{max} = \frac{3.56 W^{0.59}}{[\rho(h)/\rho_0]^{0.45}} \quad \text{[kT/s]}\]</div>
-  <div class="equation">\[t_{max} = 0.038 W^{0.44} [\rho(h)/\rho_0]^{0.36} \quad \text{[s]}\]</div>
   <h2>Variables:</h2>
   <ul>
     <li>\(P_{max}\): Maximum thermal power [kT/s]</li>
-    <li>\(t_{max}\): Time to maximum thermal power [s]</li>
     <li>\(W\): Weapon yield [kt]</li>
-    <li>\(\rho(h)\): Air density at height h [kg/m<sup>3</sup>]</li>
-    <li>\(\rho_0\): Sea level air density [kg/m<sup>3</sup>]</li>
+    <li>\(\rho(h)\): Air density at height h [g/cm<sup>3</sup>]</li>
+    <li>\(\rho_0\): Sea level air density [g/cm<sup>3</sup>]</li>
   </ul>
   <h2>Description:</h2>
-  <p>Altitude-corrected thermal pulse characteristics accounting for atmospheric density variations. Lower density at altitude affects both peak power and pulse timing.</p>
+  <p>Altitude-corrected maximum thermal power accounting for atmospheric density variations over 15,000 ft. Density ratios can be looked up in Glasstone Table 7.85.</p>
 </body>
 </html>
