@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Equation 14: Fusion Yield in a Sphere</title>
+  <title>Equation 43: Mass Attenuation Coefficient (Mixture)</title>
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script id="MathJax-script" async
     src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
@@ -17,17 +17,17 @@
   </style>
 </head>
 <body>
-  <h1>Equation 14: Fusion Yield in a Sphere</h1>
+  <h1>Equation 43: Mass Attenuation Coefficient (Mixture)</h1>
   <h2>Equation:</h2>
-  <div class="equation">\[Y = \frac{4}{3} \pi R^3 n_{tar} Q\]</div>
+  <div class="equation">\[\frac{\mu}{\rho} = \sum_{i=1}^{n} \omega_i \left(\frac{\mu}{\rho}\right)_i \quad \left[\frac{\text{cm}^2}{\text{g}}\right]\]</div>
   <h2>Variables:</h2>
   <ul>
-    <li>\(Y\): Total energy yield [J]</li>
-    <li>\(R\): Radius of fusion sphere [m]</li>
-    <li>\(n_{tar}\): Number density of target particles [targets/m<sup>3</sup>]</li>
-    <li>\(Q\): Energy per fusion reaction [J]</li>
+    <li>\(\mu/\rho\): Mass attenuation coefficient of mixture [cm<sup>2</sup>/g]</li>
+    <li>\(\omega_i\): Weight percent of component i [%]</li>
+    <li>\((\mu/\rho)_i\): Mass attenuation coefficient of component i [cm<sup>2</sup>/g]</li>
+    <li>\(n\): Number of components [-]</li>
   </ul>
   <h2>Description:</h2>
-  <p>Energy yield from fusion reactions in a spherical volume, assuming complete burnup of target material.</p>
+  <p>Mixture rule for calculating mass attenuation coefficients from constituent materials weighted by their mass fractions. The factor of 1/100 converts weight percent to weight fraction.</p>
 </body>
 </html>

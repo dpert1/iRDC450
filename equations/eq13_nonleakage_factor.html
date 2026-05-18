@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Equation 41: Dose Equivalent</title>
+  <title>Equation 13: Plutonium Non-Leakage Factor</title>
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script id="MathJax-script" async
     src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
@@ -17,16 +17,18 @@
   </style>
 </head>
 <body>
-  <h1>Equation 41: Dose Equivalent</h1>
+  <h1>Equation 13: Plutonium Non-Leakage Factor</h1>
   <h2>Equation:</h2>
-  <div class="equation">\[H = DQ \quad \text{[rem]}\]</div>
+  <div class="equation">\[L_{Pu} = 0.43\, m^{-0.15} \ln C + 0.14 \ln m \qquad C = \frac{\rho}{\rho_0}\]</div>
   <h2>Variables:</h2>
   <ul>
-    <li>\(H\): Dose equivalent [rem or Sv]</li>
-    <li>\(D\): Absorbed dose [rad or Gy]</li>
-    <li>\(Q\): Quality factor [-]</li>
+    <li>\(L_{Pu}\): Non-leakage factor for a fissioning plutonium sphere [-]</li>
+    <li>\(m\): Mass of plutonium fuel [kg]</li>
+    <li>\(C\): Compression ratio relative to nominal plutonium density [-]</li>
+    <li>\(\rho\): Compressed density [g/cm<sup>3</sup>]</li>
+    <li>\(\rho_0\): Nominal plutonium density, 19.85 [g/cm<sup>3</sup>]</li>
   </ul>
   <h2>Description:</h2>
-  <p>Dose equivalent relates absorbed dose to biological effect through the quality factor. For gamma and beta radiation Q ≈ 1, while for neutrons Q ranges from 5-20 depending on energy. 1 rem = 0.01 Sv; 1 rad = 0.01 Gy.</p>
+  <p>This equation is an approximation for the non-leakage factor of a fissioning sphere of plutonium, based on data from Bridgman. It is ONLY a valid approximation for plutonium.</p>
 </body>
 </html>
