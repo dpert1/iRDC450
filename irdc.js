@@ -119,6 +119,11 @@
             area.parentNode.appendChild(area);
         });
 
+        // A mouse click should not give the hotspot keyboard focus (which would leave it highlighted)
+        svgElement.addEventListener('mousedown', function (event) {
+            if (event.target.closest('[data-hotspot]')) event.preventDefault();
+        });
+
         svgElement.addEventListener('click', function (event) {
             const area = event.target.closest('[data-hotspot]');
             if (area) openPopup(area, event.pageX, event.pageY, false);

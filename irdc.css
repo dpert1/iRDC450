@@ -106,8 +106,9 @@ body {
     fill: rgba(255, 215, 0, 0.25);
 }
 
-#rdcContainer [data-hotspot]:focus-visible {
-    outline: 2px solid #b8860b;
+/* No focus outline: keyboard focus is shown by the same soft highlight as hover */
+#rdcContainer [data-hotspot]:focus {
+    outline: none;
 }
 
 /* Phones: keep the card at full size and scroll it sideways, and show the popup as a sheet along the bottom */
