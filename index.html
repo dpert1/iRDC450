@@ -85,14 +85,36 @@
             color: #c0392b;
         }
 
+        /* Clickable hotspots drawn in the SVG (ids prc-*) */
+        #rdcContainer [id^="prc-"] {
+            fill: transparent;
+            stroke: none;
+            cursor: pointer;
+        }
+
+        #rdcContainer [id^="prc-"]:hover {
+            fill: rgba(255, 215, 0, 0.25);
+        }
+
         .warning {
             color: #e74c3c;
             font-weight: bold;
             text-align: center;
         }
     </style>
-    <!-- MathJax for rendering LaTeX -->
-    <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <!-- MathJax for rendering LaTeX. If a popup is opened before MathJax finishes loading, it is typeset on load. -->
+    <script>
+        window.MathJax = {
+            startup: {
+                typeset: false,
+                ready() {
+                    MathJax.startup.defaultReady();
+                    MathJax.startup.promise.then(() => { if (window.typesetPopup) typesetPopup(); });
+                }
+            }
+        };
+    </script>
+    <script async src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js"></script>
 </head>
 
 <body>
@@ -112,18 +134,36 @@
     </div>
 
     <script>
-        // Load and display LaTeX content from file
-        function loadContent(filename, event, column) {
-            fetch(filename)
-                .then(response => response.text())
-                .then(content => showPopup(content, event, column))
-                .catch(err => console.error('Error loading content:', err));
+        // Equation content, keyed by SVG hotspot id (loaded from equations.json)
+        var equations = {};
+
+        // Typeset the popup only, once MathJax has loaded
+        function typesetPopup() {
+            if (window.MathJax && MathJax.typesetPromise) {
+                MathJax.typesetPromise([document.getElementById('latexContent')]);
+            }
+        }
+
+        // Build the popup HTML for one equation entry
+        function renderEquation(entry) {
+            var html = '<h1>' + entry.title + '</h1>';
+            html += '<h2>Equation:</h2>';
+            entry.equations.forEach(function(eq) { html += '<div class="equation">' + eq + '</div>'; });
+            html += '<h2>Variables:</h2><ul>';
+            entry.variables.forEach(function(v) { html += '<li>' + v.sym + ': ' + v.def + '</li>'; });
+            html += '</ul><h2>Description:</h2>';
+            entry.description.forEach(function(block) {
+                html += block.eq ? '<div class="equation">' + block.eq + '</div>' : '<p>' + block.p + '</p>';
+            });
+            return html;
         }
 
         // Show the popup at an appropriate position
-        function showPopup(content, event, column) {
+        function showPopup(entry, event) {
             var popup = document.getElementById('equationPopup');
-            document.getElementById('latexContent').innerHTML = content;
+            var content = document.getElementById('latexContent');
+            if (window.MathJax && MathJax.typesetClear) MathJax.typesetClear([content]);
+            content.innerHTML = renderEquation(entry);
             popup.style.display = 'block';
 
             const viewportWidth = window.innerWidth;
@@ -131,7 +171,7 @@
 
             popup.style.top = (event.pageY + 30) + 'px';
 
-            if (column === "left" || column === "middle") {
+            if (entry.column === "left") {
                 const rightSpace = viewportWidth - clickX;
                 popup.style.left = (rightSpace >= 650)
                     ? (clickX + 20) + 'px'
@@ -141,7 +181,7 @@
                 popup.style.left = Math.max(20, viewportWidth / 2.5 - 300) + 'px';
             }
 
-            MathJax.typesetPromise();
+            typesetPopup();
         }
 
         // Close the popup
@@ -149,85 +189,28 @@
             document.getElementById('equationPopup').style.display = 'none';
         }
 
-        // Set up a clickable SVG area with hover highlight and content load on click
-        function initializeClickableArea(svgElement, areaId, contentUrl, column) {
-            var area = svgElement.getElementById(areaId);
-            console.log('Initializing clickable area:', areaId, area);
-            if (area) {
-                area.style.fill = 'transparent';
-                area.style.stroke = 'none';
-                area.style.cursor = 'pointer';
-                area.addEventListener('click',     function(event) { loadContent(contentUrl, event, column); });
-                area.addEventListener('mouseover', function()      { area.style.fill = 'rgba(255, 215, 0, 0.25)'; });
-                area.addEventListener('mouseout',  function()      { area.style.fill = 'transparent'; area.style.stroke = 'none'; });
-            } else {
-                console.warn('Clickable area ' + areaId + ' not found in SVG.');
-            }
-        }
-
-        // Fetch and embed the SVG, then wire up all clickable areas
-        fetch('NE450_RDC_Both.svg')
-            .then(response => response.text())
-            .then(svgText => {
-                document.getElementById('rdcContainer').innerHTML = svgText;
-                const svgElement = document.getElementById('rdcContainer').querySelector('svg');
+        // Fetch the SVG and equation data, embed the SVG, then wire up one delegated click handler
+        Promise.all([
+            fetch('NE450_RDC_Both.svg').then(response => response.text()),
+            fetch('equations.json').then(response => response.json())
+        ])
+            .then(([svgText, data]) => {
+                const container = document.getElementById('rdcContainer');
+                container.innerHTML = svgText;
+                const svgElement = container.querySelector('svg');
                 if (!svgElement) { console.error('SVG element not found in container'); return; }
 
-                initializeClickableArea(svgElement,'prc-1','equations/eq01_swu.html','left');
-                initializeClickableArea(svgElement,'prc-2-1','equations/eq02-1_feed_factor.html','left');
-                initializeClickableArea(svgElement,'prc-2-2','equations/eq02-2_waste_factor.html','left');
-                initializeClickableArea(svgElement,'prc-3','equations/eq03_separation_potential.html','left');
-                initializeClickableArea(svgElement,'prc-4','equations/eq04_num_stages.html','left');
-                initializeClickableArea(svgElement,'prc-5','equations/eq05_gaseous_diffusion_alpha.html','left');
-                initializeClickableArea(svgElement,'prc-6','equations/eq06_centrifuge_alpha.html','left');
-                initializeClickableArea(svgElement,'prc-7','equations/eq07_multiplication_factor.html','left');
-                initializeClickableArea(svgElement,'prc-8','equations/eq08_neutron_lifetime.html','left');
-                initializeClickableArea(svgElement,'prc-9','equations/eq09_bomb_alpha.html','left');
-                initializeClickableArea(svgElement,'prc-10-1','equations/eq10-1_neutron_population.html','left');
-                initializeClickableArea(svgElement,'prc-10-2','equations/eq10-2_fission_yield.html','left');
-                initializeClickableArea(svgElement,'prc-11','equations/eq11_expansion_velocity.html','left');
-                initializeClickableArea(svgElement,'prc-12','equations/eq12_adjusted_xs.html','left');
-                initializeClickableArea(svgElement,'prc-13','equations/eq13_nonleakage_factor.html','left');
-                initializeClickableArea(svgElement,'prc-14','equations/eq14_fusion_yield.html','left');
-                initializeClickableArea(svgElement,'prc-15','equations/eq15_fusion_yield_sphere.html','left');
-                initializeClickableArea(svgElement,'prc-16-1','equations/eq16-1_reaction_rate_density.html','left');
-                initializeClickableArea(svgElement,'prc-16-2','equations/eq16-2_fusion_atoms.html','left');
-                initializeClickableArea(svgElement,'prc-17','equations/eq17_dd_reactivity.html','left');
-                initializeClickableArea(svgElement,'prc-18','equations/eq18_dt_reactivity.html','left');
-                initializeClickableArea(svgElement,'prc-19','equations/eq19_xray_spectrum.html','right');
-                initializeClickableArea(svgElement,'prc-20-1','equations/eq20-1_xray_fluence.html','right');
-                initializeClickableArea(svgElement,'prc-20-2','equations/eq20-2_xray_yield.html','right');
-                initializeClickableArea(svgElement,'prc-21','equations/eq21_planck_integral.html','right');
-                initializeClickableArea(svgElement,'prc-22','equations/eq22_xray_deposition.html','right');
-                initializeClickableArea(svgElement,'prc-23','equations/eq23_xray_pressure.html','right');
-                initializeClickableArea(svgElement,'prc-24','equations/eq24_fireball_radius.html','right');
-                initializeClickableArea(svgElement,'prc-25-1','equations/eq25_max_thermal_power_low.html','right');
-                initializeClickableArea(svgElement,'prc-25-2','equations/eq25_time_max_thermal_low.html','right');
-                initializeClickableArea(svgElement,'prc-26-1','equations/eq26_max_thermal_power_high.html','right');
-                initializeClickableArea(svgElement,'prc-26-2','equations/eq26_time_max_thermal_high.html','right');
-                initializeClickableArea(svgElement,'prc-27','equations/eq27_total_thermal_energy.html','right');
-                initializeClickableArea(svgElement,'prc-28','equations/eq28_thermal_fluence_cm.html','right');
-                initializeClickableArea(svgElement,'prc-29','equations/eq29_thermal_fluence_kft.html','right');
-                initializeClickableArea(svgElement,'prc-30','equations/eq30_thermal_fluence_miles.html','right');
-                initializeClickableArea(svgElement,'prc-31','equations/eq31_slant_range_cube_scaling.html','right');
-                initializeClickableArea(svgElement,'prc-32','equations/eq32_distance_time_height_cube_scaling.html','right');
-                initializeClickableArea(svgElement,'prc-33','equations/eq33_altitude_scaling_factors.html','right');
-                initializeClickableArea(svgElement,'prc-34','equations/eq34_altitude_scaling.html','right');
-                initializeClickableArea(svgElement,'prc-35','equations/eq35_crater_scaling.html','right');
-                initializeClickableArea(svgElement,'prc-36','equations/eq36_crater_volume.html','right');
-                initializeClickableArea(svgElement,'prc-37','equations/eq37_crater_dimensions.html','right');
-                initializeClickableArea(svgElement,'prc-38-1','equations/eq38-1_initial_dose.html','left');
-                initializeClickableArea(svgElement,'prc-38-2','equations/eq38-2_dose_equivalent.html','left');
-                initializeClickableArea(svgElement,'prc-39','equations/eq39_residual_dose_rate.html','left');
-                initializeClickableArea(svgElement,'prc-40','equations/eq40_accumulated_dose.html','left');
-                initializeClickableArea(svgElement,'prc-41','equations/eq41_photon_attenuation.html','left');
-                initializeClickableArea(svgElement,'prc-42','equations/eq42_mass_atten_coeff.html','left');
-                initializeClickableArea(svgElement,'prc-43-1','equations/eq43-1_linear_attn_coef.html','left');
-                initializeClickableArea(svgElement,'prc-43-2','equations/eq43-2_mean_free_path.html','left');
-                initializeClickableArea(svgElement,'prc-44-1','equations/eq44-1_number_density.html','left');
-                initializeClickableArea(svgElement,'prc-44-2','equations/eq44-2_macro_xs.html','left');
+                data.forEach(entry => {
+                    equations[entry.id] = entry;
+                    if (!svgElement.getElementById(entry.id)) console.warn('Clickable area ' + entry.id + ' not found in SVG.');
+                });
+
+                svgElement.addEventListener('click', function(event) {
+                    const area = event.target.closest('[id^="prc-"]');
+                    if (area && equations[area.id]) showPopup(equations[area.id], event);
+                });
             })
-            .catch(err => console.error('Error loading SVG:', err));
+            .catch(err => console.error('Error loading RDC:', err));
 
     </script>
     <h3 class="warning">YOU WILL NOT HAVE THIS VERSION OF THE RDC ON ANY EXAM</h3>

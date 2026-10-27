@@ -1,0 +1,1757 @@
+[
+  {
+    "id": "prc-1",
+    "column": "left",
+    "title": "Equation 1: Separative Work Units (SWU)",
+    "equations": [
+      "\\[SWU = [P \\cdot V(x_p) + W \\cdot V(x_w) - F \\cdot V(x_f)] \\tau \\quad \\text{[kg-SWU]}\\]"
+    ],
+    "variables": [
+      {
+        "sym": "\\(SWU\\)",
+        "def": "Separative work units [kg-SWU]"
+      },
+      {
+        "sym": "\\(P\\)",
+        "def": "Product flow rate [kg/time]"
+      },
+      {
+        "sym": "\\(W\\)",
+        "def": "Waste (tails) flow rate [kg/time]"
+      },
+      {
+        "sym": "\\(F\\)",
+        "def": "Feed flow rate [kg/time]"
+      },
+      {
+        "sym": "\\(V(x_i)\\)",
+        "def": "Separation potential \\(x_i\\) [SWU]"
+      },
+      {
+        "sym": "\\(x_p\\)",
+        "def": "Product enrichment (mass fraction) [-]"
+      },
+      {
+        "sym": "\\(x_w\\)",
+        "def": "Waste enrichment (mass fraction) [-]"
+      },
+      {
+        "sym": "\\(x_f\\)",
+        "def": "Feed enrichment (mass fraction) [-]"
+      },
+      {
+        "sym": "\\(\\tau\\)",
+        "def": "Time period [time]"
+      }
+    ],
+    "description": [
+      {
+        "p": "Separative work units quantify the effort required in isotope separation processes. The separation potential, V(x), represents the work needed to enrich material to a given concentration. Generally, we will consider time to be unity, so \\(\\tau\\) = 1 and the flow rates will become masses by unit cancellation."
+      }
+    ]
+  },
+  {
+    "id": "prc-2-1",
+    "column": "left",
+    "title": "Equation 2-1: Feed Factor",
+    "equations": [
+      "\\[\\frac{F}{P} = \\frac{x_p - x_w}{x_f - x_w}\\]"
+    ],
+    "variables": [
+      {
+        "sym": "\\(F\\)",
+        "def": "Feed flow rate [kg/time]"
+      },
+      {
+        "sym": "\\(P\\)",
+        "def": "Product flow rate [kg/time]"
+      },
+      {
+        "sym": "\\(x_p\\)",
+        "def": "Product enrichment (mass fraction) [-]"
+      },
+      {
+        "sym": "\\(x_w\\)",
+        "def": "Waste enrichment (mass fraction) [-]"
+      },
+      {
+        "sym": "\\(x_f\\)",
+        "def": "Feed enrichment (mass fraction) [-]"
+      }
+    ],
+    "description": [
+      {
+        "p": "The feed factor relates the feed and product flow rates in an isotope separation cascade based on their respective enrichment levels."
+      }
+    ]
+  },
+  {
+    "id": "prc-2-2",
+    "column": "left",
+    "title": "Equation 2-2: Waste Factor",
+    "equations": [
+      "\\[\\frac{W}{P} = \\frac{x_p - x_f}{x_f - x_w}\\]"
+    ],
+    "variables": [
+      {
+        "sym": "\\(W\\)",
+        "def": "Waste (tails) flow rate [kg/time]"
+      },
+      {
+        "sym": "\\(P\\)",
+        "def": "Product flow rate [kg/time]"
+      },
+      {
+        "sym": "\\(x_p\\)",
+        "def": "Product enrichment (mass fraction) [-]"
+      },
+      {
+        "sym": "\\(x_w\\)",
+        "def": "Waste enrichment (mass fraction) [-]"
+      },
+      {
+        "sym": "\\(x_f\\)",
+        "def": "Feed enrichment (mass fraction) [-]"
+      }
+    ],
+    "description": [
+      {
+        "p": "The waste factor relates the waste and product flow rates in an isotope separation cascade based on their respective enrichment levels."
+      }
+    ]
+  },
+  {
+    "id": "prc-3",
+    "column": "left",
+    "title": "Equation 3: Separation Potential V(x<sub>i</sub>)",
+    "equations": [
+      "\\[V(x_i) = (2x_i - 1) \\ln\\left(\\frac{x_i}{1 - x_i}\\right) \\quad \\text{[SWU]}\\]"
+    ],
+    "variables": [
+      {
+        "sym": "\\(V(x_i)\\)",
+        "def": "Value function at enrichment \\(x_i\\) [SWU]"
+      },
+      {
+        "sym": "\\(x_i\\)",
+        "def": "Enrichment (mass fraction) of stream i [-]"
+      }
+    ],
+    "description": [
+      {
+        "p": "The value function quantifies the separative work content of material at a given enrichment level. It appears in the SWU calculation and represents the difficulty of achieving a particular enrichment. The separation potential will need to be found for all three streams (feed, product, and waste) when calculating SWU."
+      }
+    ]
+  },
+  {
+    "id": "prc-4",
+    "column": "left",
+    "title": "Equation 4: Number of Stages in Cascade",
+    "equations": [
+      "\\[N = \\frac{2}{\\ln \\alpha} \\ln\\left(\\frac{x_p(1 - x_w)}{x_w(1 - x_p)}\\right) - 1\\]"
+    ],
+    "variables": [
+      {
+        "sym": "\\(N\\)",
+        "def": "Number of ideal stages [-]"
+      },
+      {
+        "sym": "\\(\\alpha\\)",
+        "def": "Separation factor [-]"
+      },
+      {
+        "sym": "\\(x_p\\)",
+        "def": "Product enrichment (mass fraction) [-]"
+      },
+      {
+        "sym": "\\(x_w\\)",
+        "def": "Waste enrichment (mass fraction) [-]"
+      }
+    ],
+    "description": [
+      {
+        "p": "This equation calculates the number of ideal separation stages required in a cascade to achieve desired product and waste enrichments given a specific separation factor."
+      }
+    ]
+  },
+  {
+    "id": "prc-5",
+    "column": "left",
+    "title": "Equation 5: Gaseous Diffusion Separation Factor",
+    "equations": [
+      "\\[\\alpha = \\sqrt{\\frac{m_H}{m_L}}\\]"
+    ],
+    "variables": [
+      {
+        "sym": "\\(\\alpha\\)",
+        "def": "Separation factor [-]"
+      },
+      {
+        "sym": "\\(m_H\\)",
+        "def": "Mass of heavy molecule [amu]"
+      },
+      {
+        "sym": "\\(m_L\\)",
+        "def": "Mass of light molecule [amu]"
+      }
+    ],
+    "description": [
+      {
+        "p": "The gaseous diffusion seperation factor is based on the square root of the mass ratio of molecules being seperated. This only applies to gaseous diffusion."
+      }
+    ]
+  },
+  {
+    "id": "prc-6",
+    "column": "left",
+    "title": "Equation 6: Centrifuge Separation Factor",
+    "equations": [
+      "\\[\\alpha = \\exp\\left(\\frac{(m_H - m_L) \\omega^2 r^2}{2R_UT}\\right)\\]"
+    ],
+    "variables": [
+      {
+        "sym": "\\(\\alpha\\)",
+        "def": "Separation factor [-]"
+      },
+      {
+        "sym": "\\(m_H\\)",
+        "def": "Mass of heavy molecule [kg/mol]"
+      },
+      {
+        "sym": "\\(m_L\\)",
+        "def": "Mass of light molecule [kg/mol]"
+      },
+      {
+        "sym": "\\(\\omega\\)",
+        "def": "Angular velocity [rad/s]"
+      },
+      {
+        "sym": "\\(r\\)",
+        "def": "Radius from axis of rotation [m]"
+      },
+      {
+        "sym": "\\(R_U\\)",
+        "def": "Universal gas constant [J/(mol·K)]"
+      },
+      {
+        "sym": "\\(T\\)",
+        "def": "Temperature [K]"
+      }
+    ],
+    "description": [
+      {
+        "p": "Separation factor for gas centrifuge enrichment, which depends on the mass difference, centrifuge speed, radius, and temperature. Higher speeds and larger radii increase separation."
+      }
+    ]
+  },
+  {
+    "id": "prc-7",
+    "column": "left",
+    "title": "Equation 7: Multiplication Factor",
+    "equations": [
+      "\\[k_\\infty = \\nu \\frac{\\Sigma_f}{\\Sigma_a} = \\nu \\frac{\\sigma_f}{\\sigma_a}\\]",
+      "\\[k = k_\\infty L\\]"
+    ],
+    "variables": [
+      {
+        "sym": "\\(k_\\infty\\)",
+        "def": "Infinite multiplication factor [-]"
+      },
+      {
+        "sym": "\\(\\nu\\)",
+        "def": "Average number of neutrons per fission [-]"
+      },
+      {
+        "sym": "\\(\\Sigma_f\\)",
+        "def": "Macroscopic fission cross section [cm<sup>-1</sup>]"
+      },
+      {
+        "sym": "\\(\\Sigma_a\\)",
+        "def": "Macroscopic absorption cross section [cm<sup>-1</sup>]"
+      },
+      {
+        "sym": "\\(\\sigma_f\\)",
+        "def": "Microscopic fission cross section [barns]"
+      },
+      {
+        "sym": "\\(\\sigma_a\\)",
+        "def": "Microscopic absorption cross section [barns]"
+      },
+      {
+        "sym": "\\(k\\)",
+        "def": "Effective multiplication factor [-]"
+      },
+      {
+        "sym": "\\(L\\)",
+        "def": "Non-leakage factor [-]"
+      }
+    ],
+    "description": [
+      {
+        "p": "The infinite multiplication factor represents neutron multiplication in an infinite medium. The effective multiplication factor accounts for neutron leakage in finite systems."
+      },
+      {
+        "p": "The second form, using microscopic cross sections, only holds when the fuel is a single nuclide. For a mixture (e.g., HEU containing both U-235 and U-238), sum over each nuclide i: \\(k_\\infty = \\sum_i \\nu_i N_i \\sigma_{f,i} \\,/\\, \\sum_i N_i \\sigma_{a,i}\\)."
+      }
+    ]
+  },
+  {
+    "id": "prc-8",
+    "column": "left",
+    "title": "Equation 8: Neutron Lifetime",
+    "equations": [
+      "\\[l_\\infty = \\frac{\\lambda_a}{v} = \\frac{1}{\\Sigma_a v}\\]",
+      "\\[l = l_\\infty L\\]"
+    ],
+    "variables": [
+      {
+        "sym": "\\(l_\\infty\\)",
+        "def": "Infinite medium neutron lifetime [s]"
+      },
+      {
+        "sym": "\\(\\lambda_a\\)",
+        "def": "Absorption mean free path [cm]"
+      },
+      {
+        "sym": "\\(v\\)",
+        "def": "Neutron speed [cm/s]"
+      },
+      {
+        "sym": "\\(\\Sigma_a\\)",
+        "def": "Macroscopic absorption cross section [cm<sup>-1</sup>]"
+      },
+      {
+        "sym": "\\(l\\)",
+        "def": "Effective neutron lifetime [s]"
+      },
+      {
+        "sym": "\\(L\\)",
+        "def": "Non-leakage factor [-]"
+      }
+    ],
+    "description": [
+      {
+        "p": "Infinite neutron lifetime represents the average time a neutron exists from birth (fission) to absorption in an infinite medium. The effective lifetime accounts for leakage losses in finite systems."
+      }
+    ]
+  },
+  {
+    "id": "prc-9",
+    "column": "left",
+    "title": "Equation 9: Multiplication Rate (Bomb Alpha)",
+    "equations": [
+      "\\[\\alpha = \\frac{k - 1}{l}\\]"
+    ],
+    "variables": [
+      {
+        "sym": "\\(\\alpha\\)",
+        "def": "Multiplication rate [s<sup>-1</sup>]"
+      },
+      {
+        "sym": "\\(k\\)",
+        "def": "Effective multiplication factor [-]"
+      },
+      {
+        "sym": "\\(l\\)",
+        "def": "Effective neutron lifetime [s]"
+      }
+    ],
+    "description": [
+      {
+        "p": "The multiplication rate (also called bomb alpha) determines the exponential rate of change of neutron population in a fissioning weapon core. Positive values indicate a supercritical state with increasing neutron population, whereas negative values indicate a subcritical state with decreasing neutron population."
+      }
+    ]
+  },
+  {
+    "id": "prc-10-1",
+    "column": "left",
+    "title": "Equation 10-1: Neutron Population",
+    "equations": [
+      "\\[N(t) = N_0 e^{\\alpha t}\\]"
+    ],
+    "variables": [
+      {
+        "sym": "\\(N(t)\\)",
+        "def": "Neutron population at time t [# of neutrons]"
+      },
+      {
+        "sym": "\\(N_0\\)",
+        "def": "Initial neutron population [# of neutrons]"
+      },
+      {
+        "sym": "\\(\\alpha\\)",
+        "def": "Multiplication rate (bomb alpha) [s<sup>-1</sup>]"
+      },
+      {
+        "sym": "\\(t\\)",
+        "def": "Time [s]"
+      }
+    ],
+    "description": [
+      {
+        "p": "Neutron population describes the exponential growth (or decay) of neutrons in a fissioning system over time."
+      }
+    ]
+  },
+  {
+    "id": "prc-10-2",
+    "column": "left",
+    "title": "Equation 10-2: Energy Yield",
+    "equations": [
+      "\\[Y(t) = \\frac{\\Sigma_f v Q N_0}{\\alpha} \\left(e^{\\alpha t} - 1\\right)\\]"
+    ],
+    "variables": [
+      {
+        "sym": "\\(Y(t)\\)",
+        "def": "Energy yield at time t [MeV or kT]"
+      },
+      {
+        "sym": "\\(\\Sigma_f\\)",
+        "def": "Macroscopic fission cross section [cm<sup>-1</sup>]"
+      },
+      {
+        "sym": "\\(v\\)",
+        "def": "Neutron speed [cm/s]"
+      },
+      {
+        "sym": "\\(Q\\)",
+        "def": "Energy per fission [MeV or kT]"
+      },
+      {
+        "sym": "\\(N_0\\)",
+        "def": "Initial neutron population [# of neutrons]"
+      },
+      {
+        "sym": "\\(\\alpha\\)",
+        "def": "Multiplication rate (bomb alpha) [s<sup>-1</sup>]"
+      },
+      {
+        "sym": "\\(t\\)",
+        "def": "Time [s]"
+      }
+    ],
+    "description": [
+      {
+        "p": "Energy yield describes the exponential growth (or decay) of accumulated energy yield in a fissioning system over time."
+      }
+    ]
+  },
+  {
+    "id": "prc-11",
+    "column": "left",
+    "title": "Equation 11: Expansion Velocity",
+    "equations": [
+      "\\[\\frac{Y}{3} = \\frac{1}{2} M (u_2)^2\\]"
+    ],
+    "variables": [
+      {
+        "sym": "\\(Y\\)",
+        "def": "Energy yield [J]"
+      },
+      {
+        "sym": "\\(M\\)",
+        "def": "Mass of material in the bomb core (fuel + tamper) [kg]"
+      },
+      {
+        "sym": "\\(u_2\\)",
+        "def": "Mean expansion velocity [m/s]"
+      }
+    ],
+    "description": [
+      {
+        "p": "This relation connects the energy yield to the mass and expansion velocity of fissile material in a weapon."
+      }
+    ]
+  },
+  {
+    "id": "prc-12",
+    "column": "left",
+    "title": "Equation 12: Compressed Cross Section",
+    "equations": [
+      "\\[\\Sigma = \\Sigma_0 \\left(\\frac{\\rho}{\\rho_0}\\right) \\left(1 - B_F + 2B_F \\frac{\\sigma_{ff}}{\\sigma_{fuel}}\\right)\\]"
+    ],
+    "variables": [
+      {
+        "sym": "\\(\\Sigma\\)",
+        "def": "Compressed macroscopic cross section [cm<sup>-1</sup>]"
+      },
+      {
+        "sym": "\\(\\Sigma_0\\)",
+        "def": "Initial macroscopic cross section [cm<sup>-1</sup>]"
+      },
+      {
+        "sym": "\\(\\rho\\)",
+        "def": "Compressed density [g/cm<sup>3</sup>]"
+      },
+      {
+        "sym": "\\(\\rho_0\\)",
+        "def": "Initial density [g/cm<sup>3</sup>]"
+      },
+      {
+        "sym": "\\(B_F\\)",
+        "def": "Burn-up factor [-]"
+      },
+      {
+        "sym": "\\(\\sigma_{ff}\\)",
+        "def": "Fission fragment cross section [barns or cm<sup>2</sup>]"
+      },
+      {
+        "sym": "\\(\\sigma_{fuel}\\)",
+        "def": "Fuel cross section [barns or cm<sup>2</sup>]"
+      }
+    ],
+    "description": [
+      {
+        "p": "This equation accounts for the change in any macroscopic cross section when nuclear material is compressed and burned, considering both density changes and burn-up effects."
+      }
+    ]
+  },
+  {
+    "id": "prc-13",
+    "column": "left",
+    "title": "Equation 13: Plutonium Non-Leakage Factor",
+    "equations": [
+      "\\[L_{Pu} = 0.43\\, m^{-0.15} \\ln C + 0.14 \\ln m \\qquad C = \\frac{\\rho}{\\rho_0}\\]"
+    ],
+    "variables": [
+      {
+        "sym": "\\(L_{Pu}\\)",
+        "def": "Non-leakage factor for a fissioning plutonium sphere [-]"
+      },
+      {
+        "sym": "\\(m\\)",
+        "def": "Mass of plutonium fuel [kg]"
+      },
+      {
+        "sym": "\\(C\\)",
+        "def": "Compression ratio relative to nominal plutonium density [-]"
+      },
+      {
+        "sym": "\\(\\rho\\)",
+        "def": "Compressed density [g/cm<sup>3</sup>]"
+      },
+      {
+        "sym": "\\(\\rho_0\\)",
+        "def": "Nominal plutonium density, 19.85 [g/cm<sup>3</sup>]"
+      }
+    ],
+    "description": [
+      {
+        "p": "This equation is an approximation for the non-leakage factor of a fissioning sphere of plutonium, based on data from Bridgman. It is ONLY a valid approximation for plutonium."
+      },
+      {
+        "p": "Because this is a curve fit, only use it within the range of masses and compressions covered by the source data. Outside that range it gives non-physical results: for example, at \\(C = 1\\) it goes negative for \\(m < 1\\) kg because \\(\\ln m < 0\\)."
+      }
+    ]
+  },
+  {
+    "id": "prc-14",
+    "column": "left",
+    "title": "Equation 14: Fusion Yield",
+    "equations": [
+      "\\[Y = N_{reac}Q\\]"
+    ],
+    "variables": [
+      {
+        "sym": "\\(Y\\)",
+        "def": "Total energy yield [kT or MeV]"
+      },
+      {
+        "sym": "\\(N_{reac}\\)",
+        "def": "Number of fusion reactions [-]"
+      },
+      {
+        "sym": "\\(Q\\)",
+        "def": "Energy per fusion reaction [kT or MeV]"
+      }
+    ],
+    "description": [
+      {
+        "p": "The total energy released from fusion is simply the number of reactions multiplied by the energy released per reaction."
+      },
+      {
+        "p": "\\(Q_{DD} = 9.96\\) MeV (footnote to the thermonuclear reactions table) is an effective Q-value for D-D burning. It assumes the two D-D branches occur equally often and that the tritium from \\(D + D \\rightarrow T + H\\) also burns with deuterium, while the \\(^3\\text{He}\\) from \\(D + D \\rightarrow {}^3\\text{He} + n\\) does not: 4.03 + 3.27 + 17.6 = 24.9 MeV from 5 deuterons, or 4.98 MeV per deuteron. \\(Q_{DD}\\) is that per-deuteron average multiplied by 2, i.e. the energy per D-D reaction when the tritium burn is included."
+      }
+    ]
+  },
+  {
+    "id": "prc-15",
+    "column": "left",
+    "title": "Equation 15: Fusion Yield in a Sphere",
+    "equations": [
+      "\\[Y = \\frac{4}{3} \\pi r^3 n_{tar} Q\\]"
+    ],
+    "variables": [
+      {
+        "sym": "\\(Y\\)",
+        "def": "Total energy yield [J]"
+      },
+      {
+        "sym": "\\(r\\)",
+        "def": "Radius of fusion sphere [m]"
+      },
+      {
+        "sym": "\\(n_{tar}\\)",
+        "def": "Number density of target particles [targets/m<sup>3</sup>]"
+      },
+      {
+        "sym": "\\(Q\\)",
+        "def": "Energy per fusion reaction [J]"
+      }
+    ],
+    "description": [
+      {
+        "p": "Energy yield from fusion reactions in a spherical volume, assuming complete burnup of target material."
+      }
+    ]
+  },
+  {
+    "id": "prc-16-1",
+    "column": "left",
+    "title": "Equation 16-1: Fusion Reaction Rate Density",
+    "equations": [
+      "\\[\\hat{R}\\ = (\\overline{\\sigma v}) n_{tar} n_{bomb}\\]"
+    ],
+    "variables": [
+      {
+        "sym": "\\(\\hat{R}\\)",
+        "def": "Reaction rate density [reactions/(cm<sup>3</sup>·s)]"
+      },
+      {
+        "sym": "\\((\\overline{\\sigma v})\\)",
+        "def": "Reactivity (fusion cross section) [cm<sup>3</sup>/s]"
+      },
+      {
+        "sym": "\\(n_{tar}\\)",
+        "def": "Number density of target particles [particles/cm<sup>3</sup>]"
+      },
+      {
+        "sym": "\\(n_{bomb}\\)",
+        "def": "Number density of bombarding particles [particles/cm<sup>3</sup>]"
+      }
+    ],
+    "description": [
+      {
+        "p": "Reaction rate density for fusion between two different species (e.g., D-T)."
+      },
+      {
+        "p": "Note: for like-species fusion (D-D), every deuteron can act as either target or bombarder, and each pair may only be counted once, so the rate is \\(\\hat{R} = \\tfrac{1}{2}(\\overline{\\sigma v}) n_D^2\\). If you follow Equation 16-2 and split the deuterium into equal target and bombarding halves (\\(n_{tar} = n_{bomb} = n_D/2\\)), this is the same as multiplying Equation 16-1 by 2:"
+      },
+      {
+        "eq": "\\[\\hat{R} = \\tfrac{1}{2}(\\overline{\\sigma v}) n_D^2 = 2(\\overline{\\sigma v}) n_{tar} n_{bomb}\\]"
+      },
+      {
+        "p": "Use one form or the other. Setting \\(n_{tar} = n_{bomb} = n_D\\) and also applying the factor of 2 overcounts the rate by a factor of 4."
+      }
+    ]
+  },
+  {
+    "id": "prc-16-2",
+    "column": "left",
+    "title": "Equation 16-2: Fusion Particle Number Density",
+    "equations": [
+      "\\[n_{tar} = n_{bomb} = \\frac{n_{tot}}{2}\\]"
+    ],
+    "variables": [
+      {
+        "sym": "\\(n_{tar}\\)",
+        "def": "Number density of target particles [particles/cm<sup>3</sup>]"
+      },
+      {
+        "sym": "\\(n_{bomb}\\)",
+        "def": "Number density of bombarding particles [particles/cm<sup>3</sup>]"
+      },
+      {
+        "sym": "\\(n_{tot}\\)",
+        "def": "Total particle number density [particles/cm<sup>3</sup>]"
+      }
+    ],
+    "description": [
+      {
+        "p": "If the bombarding and target nuclei are in equal ratio, such as D-D reactions or balanced D-T reactions, each species has equal number density at half the total number density. For D-D, remember the factor of 2 in Equation 16-1 when using these halves."
+      }
+    ]
+  },
+  {
+    "id": "prc-17",
+    "column": "left",
+    "title": "Equation 17: D-D Fusion Reactivity",
+    "equations": [
+      "\\[\\langle \\sigma v \\rangle_{DD} = 2.33 \\times 10^{-14} E^{-2/3} e^{-18.76 E^{-1/3}}\\]"
+    ],
+    "variables": [
+      {
+        "sym": "\\(\\langle \\sigma v \\rangle_{DD}\\)",
+        "def": "D-D reactivity [cm<sup>3</sup>/s]"
+      },
+      {
+        "sym": "\\(E\\)",
+        "def": "Ion temperature [keV]"
+      }
+    ],
+    "description": [
+      {
+        "p": "Simplified temperature-dependent reactivity for deuterium-deuterium fusion reactions. This parameterization provides the reaction rate coefficient as a function of plasma temperature ONLY for temperatures <25 keV."
+      }
+    ]
+  },
+  {
+    "id": "prc-18",
+    "column": "left",
+    "title": "Equation 18: D-T Fusion Reactivity",
+    "equations": [
+      "\\[\\langle \\sigma v \\rangle_{DT} = 3.68 \\times 10^{-12} E^{-2/3} e^{-19.94 E^{-1/3}}\\]"
+    ],
+    "variables": [
+      {
+        "sym": "\\(\\langle \\sigma v \\rangle_{DT}\\)",
+        "def": "D-T reactivity [cm<sup>3</sup>/s]"
+      },
+      {
+        "sym": "\\(E\\)",
+        "def": "Ion temperature [keV]"
+      }
+    ],
+    "description": [
+      {
+        "p": "Simplified temperature-dependent reactivity for deuterium-tritium fusion reactions. This parameterization provides the reaction rate coefficient as a function of plasma temperature ONLY for temperatures <25 keV."
+      }
+    ]
+  },
+  {
+    "id": "prc-19",
+    "column": "right",
+    "title": "Equation 19: X-Ray Spectrum",
+    "equations": [
+      "\\[S_x(h\\nu) = Y_{ST} P(h\\nu, T_{ST}) + Y_{RR} P(h\\nu, T_{RR})\\]"
+    ],
+    "variables": [
+      {
+        "sym": "\\(S_x(h\\nu)\\)",
+        "def": "Total x-ray spectrum per photon energy [J/keV]"
+      },
+      {
+        "sym": "\\(Y_{ST}\\)",
+        "def": "Shine through x-ray yield [J]"
+      },
+      {
+        "sym": "\\(Y_{RR}\\)",
+        "def": "Case re-radiation x-ray yield [J]"
+      },
+      {
+        "sym": "\\(P(h\\nu, T)\\)",
+        "def": "Normalized Planckian spectrum at temperature T [1/keV]"
+      },
+      {
+        "sym": "\\(h\\nu\\)",
+        "def": "Photon energy [keV]"
+      },
+      {
+        "sym": "\\(T_{ST}\\)",
+        "def": "Shine through temperature [K]"
+      },
+      {
+        "sym": "\\(T_{RR}\\)",
+        "def": "Case re-radiation temperature [K]"
+      }
+    ],
+    "description": [
+      {
+        "p": "The total X-ray spectrum from a nuclear explosion is a combination of the shine through and case re-radiation x-ray components. They are found by multiplying the yield of each component by its respective Planckian spectrum."
+      }
+    ]
+  },
+  {
+    "id": "prc-20-1",
+    "column": "right",
+    "title": "Equation 20-1: X-Ray Fluence In A Vacuum",
+    "equations": [
+      "\\[F(r) = \\frac{Y_x}{4\\pi r^2}\\]"
+    ],
+    "variables": [
+      {
+        "sym": "\\(F(r)\\)",
+        "def": "X-ray fluence at distance r in a vacuum [J/m<sup>2</sup>]"
+      },
+      {
+        "sym": "\\(Y_x\\)",
+        "def": "X-ray energy yield [J]"
+      },
+      {
+        "sym": "\\(r\\)",
+        "def": "Distance from detonation [m]"
+      }
+    ],
+    "description": [
+      {
+        "p": "X-ray fluence decreases with the inverse square of distance in a vacuum."
+      }
+    ]
+  },
+  {
+    "id": "prc-20-2",
+    "column": "right",
+    "title": "Equation 20-2: X-Ray Yield",
+    "equations": [
+      "\\[Y_x = 0.7Y\\]"
+    ],
+    "variables": [
+      {
+        "sym": "\\(Y_x\\)",
+        "def": "X-ray energy yield [J]"
+      },
+      {
+        "sym": "\\(Y\\)",
+        "def": "Total weapon yield [J]"
+      }
+    ],
+    "description": [
+      {
+        "p": "Approximately 70% of the total weapon yield is initially emitted as X-rays."
+      }
+    ]
+  },
+  {
+    "id": "prc-21",
+    "column": "right",
+    "title": "Equation 21: Planck Group Integral",
+    "equations": [
+      "\\[P_g = \\int_{h\\nu_{g-1}}^{h\\nu_g} \\frac{15}{(\\pi k T)^4} \\frac{(h\\nu)^3}{\\exp\\left(\\frac{h\\nu}{kT}\\right) - 1} d(h\\nu)\\]"
+    ],
+    "variables": [
+      {
+        "sym": "\\(P_g\\)",
+        "def": "Fraction of blackbody radiation energy in energy group g [-]"
+      },
+      {
+        "sym": "\\(h\\nu\\)",
+        "def": "Photon energy [keV]"
+      },
+      {
+        "sym": "\\(h\\nu_g\\)",
+        "def": "Upper energy boundary of group g [keV]"
+      },
+      {
+        "sym": "\\(h\\nu_{g-1}\\)",
+        "def": "Lower energy boundary of group g [keV]"
+      },
+      {
+        "sym": "\\(k\\)",
+        "def": "Boltzmann constant [keV/K]"
+      },
+      {
+        "sym": "\\(T\\)",
+        "def": "Temperature [K]"
+      }
+    ],
+    "description": [
+      {
+        "p": "Integration of the Planck distribution over an energy group to determine the fraction of blackbody radiation in that group for multi-group x-ray transport calculations."
+      }
+    ]
+  },
+  {
+    "id": "prc-22",
+    "column": "right",
+    "title": "Equation 22: Energy Deposition",
+    "equations": [
+      "\\[E_{dep}(x) = \\sum_{g=1}^{G} \\left[P_g F_0 e^{-\\mu_g x} \\left(\\frac{\\mu_a}{\\rho}\\right)_g\\right]\\]"
+    ],
+    "variables": [
+      {
+        "sym": "\\(E_{dep}(x)\\)",
+        "def": "Energy deposited per unit mass at depth x [J/kg]"
+      },
+      {
+        "sym": "\\(G\\)",
+        "def": "Total number of energy groups [-]"
+      },
+      {
+        "sym": "\\(P_g\\)",
+        "def": "Fraction of incident energy in group g [-]"
+      },
+      {
+        "sym": "\\(F_0\\)",
+        "def": "Incident fluence [J/m<sup>2</sup>]"
+      },
+      {
+        "sym": "\\(\\mu_g\\)",
+        "def": "Total attenuation coefficient for group g [m<sup>-1</sup>]"
+      },
+      {
+        "sym": "\\(x\\)",
+        "def": "Depth [m]"
+      },
+      {
+        "sym": "\\((\\mu_a/\\rho)_g\\)",
+        "def": "Mass absorption coefficient for group g [m<sup>2</sup>/kg]"
+      }
+    ],
+    "description": [
+      {
+        "p": "Multi-group calculation of energy deposited in a material by X-rays as a function of depth, accounting for exponential attenuation in each energy group."
+      }
+    ]
+  },
+  {
+    "id": "prc-23",
+    "column": "right",
+    "title": "Equation 23: Pressure from Energy Deposition",
+    "equations": [
+      "\\[p(x) = E_{dep}(x) \\rho_0\\]"
+    ],
+    "variables": [
+      {
+        "sym": "\\(p(x)\\)",
+        "def": "Pressure at depth x [Pa]"
+      },
+      {
+        "sym": "\\(E_{dep}(x)\\)",
+        "def": "Energy deposited per unit mass at depth x [J/kg]"
+      },
+      {
+        "sym": "\\(\\rho_0\\)",
+        "def": "Material density [kg/m<sup>3</sup>]"
+      }
+    ],
+    "description": [
+      {
+        "p": "Pressure generated in a material by X-ray energy deposition. The deposited energy per unit mass, multiplied by density, gives the pressure impulse."
+      },
+      {
+        "p": "This assumes the energy is deposited instantaneously (before the material can expand) and a Gr&uuml;neisen parameter \\(\\Gamma = 1\\). The more general form is \\(p = \\Gamma \\rho_0 E_{dep}\\), where \\(\\Gamma\\) depends on the material."
+      }
+    ]
+  },
+  {
+    "id": "prc-24",
+    "column": "right",
+    "title": "Equation 24: Fireball Sizes",
+    "equations": [
+      "\\[R \\approx 90 W^{0.4}\\]",
+      "\\[R \\approx 110 W^{0.4}\\]",
+      "\\[R \\approx 145 W^{0.4}\\]",
+      "\\[H \\approx 180 W^{0.4}\\]"
+    ],
+    "variables": [
+      {
+        "sym": "\\(R\\)",
+        "def": "Fireball radius [ft]"
+      },
+      {
+        "sym": "\\(H\\)",
+        "def": "Max burst height for local fallout [ft]"
+      },
+      {
+        "sym": "\\(W\\)",
+        "def": "Weapon yield [kt]"
+      }
+    ],
+    "description": [
+      {
+        "p": "Empirical scaling laws for fireball dimensions at different stages of growth. The coefficients represent different times: radius at thermal minimum, radius at breakaway (air burst), radius at breakaway (surface burst). The fourth equation gives the maximum burst height where local fallout will be produced."
+      }
+    ]
+  },
+  {
+    "id": "prc-25-1",
+    "column": "right",
+    "title": "Equation 25-1: Max Thermal Power under 15,000 ft",
+    "equations": [
+      "\\[P_{max} \\approx 3.18 W^{0.56} \\quad \\text{[kT/s]}\\]"
+    ],
+    "variables": [
+      {
+        "sym": "\\(P_{max}\\)",
+        "def": "Maximum thermal power [kT/s]"
+      },
+      {
+        "sym": "\\(W\\)",
+        "def": "Weapon yield [kt]"
+      }
+    ],
+    "description": [
+      {
+        "p": "Scaling law for thermal radiation power below 15,000 ft."
+      }
+    ]
+  },
+  {
+    "id": "prc-25-2",
+    "column": "right",
+    "title": "Equation 25-2: Time to Max Thermal Power under 15,000 ft",
+    "equations": [
+      "\\[t_{max} \\approx 0.0417 W^{0.44} \\quad \\text{[s]}\\]"
+    ],
+    "variables": [
+      {
+        "sym": "\\(t_{max}\\)",
+        "def": "Time to maximum thermal power [s]"
+      },
+      {
+        "sym": "\\(W\\)",
+        "def": "Weapon yield [kt]"
+      }
+    ],
+    "description": [
+      {
+        "p": "Scaling law for the time to reach maximum thermal power below 15,000 ft."
+      }
+    ]
+  },
+  {
+    "id": "prc-26-1",
+    "column": "right",
+    "title": "Equation 26-1: Max Thermal Power above 15,000 ft",
+    "equations": [
+      "\\[P_{max} = \\frac{3.56 W^{0.59}}{[\\rho(h)/\\rho_0]^{0.45}} \\quad \\text{[kT/s]}\\]"
+    ],
+    "variables": [
+      {
+        "sym": "\\(P_{max}\\)",
+        "def": "Maximum thermal power [kT/s]"
+      },
+      {
+        "sym": "\\(W\\)",
+        "def": "Weapon yield [kt]"
+      },
+      {
+        "sym": "\\(\\rho(h)\\)",
+        "def": "Air density at height h [g/cm<sup>3</sup>]"
+      },
+      {
+        "sym": "\\(\\rho_0\\)",
+        "def": "Sea level air density [g/cm<sup>3</sup>]"
+      }
+    ],
+    "description": [
+      {
+        "p": "Altitude-corrected maximum thermal power accounting for atmospheric density variations over 15,000 ft. Density ratios can be looked up in Glasstone Table 7.85."
+      }
+    ]
+  },
+  {
+    "id": "prc-26-2",
+    "column": "right",
+    "title": "Equation 26-2: Time to Max Thermal Power above 15,000 ft",
+    "equations": [
+      "\\[t_{max} = 0.038 W^{0.44} [\\rho(h)/\\rho_0]^{0.36} \\quad \\text{[s]}\\]"
+    ],
+    "variables": [
+      {
+        "sym": "\\(t_{max}\\)",
+        "def": "Time to maximum thermal power [s]"
+      },
+      {
+        "sym": "\\(W\\)",
+        "def": "Weapon yield [kt]"
+      },
+      {
+        "sym": "\\(\\rho(h)\\)",
+        "def": "Air density at height h [g/cm<sup>3</sup>]"
+      },
+      {
+        "sym": "\\(\\rho_0\\)",
+        "def": "Sea level air density [g/cm<sup>3</sup>]"
+      }
+    ],
+    "description": [
+      {
+        "p": "Altitude-corrected time to maximum thermal power accounting for atmospheric density variations over 15,000 ft. Density ratios can be looked up in Glasstone Table 7.85."
+      }
+    ]
+  },
+  {
+    "id": "prc-27",
+    "column": "right",
+    "title": "Equation 27: Total Thermal Energy",
+    "equations": [
+      "\\[E_{tot} = fW\\]"
+    ],
+    "variables": [
+      {
+        "sym": "\\(E_{tot}\\)",
+        "def": "Total thermal energy [kt]"
+      },
+      {
+        "sym": "\\(f\\)",
+        "def": "Thermal fraction of yield [-]"
+      },
+      {
+        "sym": "\\(W\\)",
+        "def": "Weapon yield [kt]"
+      }
+    ],
+    "description": [
+      {
+        "p": "The total thermal energy radiated is a fraction f of the total weapon yield. The thermal fraction can be looked up in Glasstone Table 7.88."
+      }
+    ]
+  },
+  {
+    "id": "prc-28",
+    "column": "right",
+    "title": "Equation 28: Radiant Exposure (cm units)",
+    "equations": [
+      "\\[Q \\left[\\frac{\\text{cal}}{\\text{cm}^2}\\right] = \\frac{10^{12} f W \\tau}{4\\pi D^2[\\text{cm}]}\\]"
+    ],
+    "variables": [
+      {
+        "sym": "\\(Q\\)",
+        "def": "Radiant exposure [cal/cm<sup>2</sup>]"
+      },
+      {
+        "sym": "\\(f\\)",
+        "def": "Thermal fraction of yield [-]"
+      },
+      {
+        "sym": "\\(W\\)",
+        "def": "Weapon yield [kt]"
+      },
+      {
+        "sym": "\\(\\tau\\)",
+        "def": "Atmospheric transmission factor [-]"
+      },
+      {
+        "sym": "\\(D\\)",
+        "def": "Distance from burst [cm]"
+      }
+    ],
+    "description": [
+      {
+        "p": "Thermal energy exposure at a given distance in units of calories per square centimeter, accounting for atmospheric transmission losses. The thermal fraction can be looked up in Glasstone Table 7.88 and the atmospheric transmission factor in figure 7.98."
+      }
+    ]
+  },
+  {
+    "id": "prc-29",
+    "column": "right",
+    "title": "Equation 29: Radiant Exposure (kilofeet)",
+    "equations": [
+      "\\[Q \\left[\\frac{\\text{cal}}{\\text{cm}^2}\\right] \\approx \\frac{85.6 f W \\tau}{D^2[\\text{kft}]}\\]"
+    ],
+    "variables": [
+      {
+        "sym": "\\(Q\\)",
+        "def": "Radiant exposure [cal/cm<sup>2</sup>]"
+      },
+      {
+        "sym": "\\(f\\)",
+        "def": "Thermal fraction of yield [-]"
+      },
+      {
+        "sym": "\\(W\\)",
+        "def": "Weapon yield [kt]"
+      },
+      {
+        "sym": "\\(\\tau\\)",
+        "def": "Atmospheric transmission factor [-]"
+      },
+      {
+        "sym": "\\(D\\)",
+        "def": "Distance from burst [kilofeet]"
+      }
+    ],
+    "description": [
+      {
+        "p": "Simplified radiant exposure equation using distance in kilofeet (thousands of feet), convenient for practical calculations. The thermal fraction can be looked up in Glasstone Table 7.88 and the atmospheric transmission factor in figure 7.98."
+      }
+    ]
+  },
+  {
+    "id": "prc-30",
+    "column": "right",
+    "title": "Equation 30: Radiant Exposure (miles)",
+    "equations": [
+      "\\[Q \\left[\\frac{\\text{cal}}{\\text{cm}^2}\\right] \\approx \\frac{3.07 f W \\tau}{D^2[\\text{miles}]}\\]"
+    ],
+    "variables": [
+      {
+        "sym": "\\(Q\\)",
+        "def": "Radiant exposure [cal/cm<sup>2</sup>]"
+      },
+      {
+        "sym": "\\(f\\)",
+        "def": "Thermal fraction of yield [-]"
+      },
+      {
+        "sym": "\\(W\\)",
+        "def": "Weapon yield [kt]"
+      },
+      {
+        "sym": "\\(\\tau\\)",
+        "def": "Atmospheric transmission factor [-]"
+      },
+      {
+        "sym": "\\(D\\)",
+        "def": "Distance from burst [miles]"
+      }
+    ],
+    "description": [
+      {
+        "p": "Simplified radiant exposure equation using distance in miles, most convenient for large-scale effects calculations. The thermal fraction can be looked up in Glasstone Table 7.88 and the atmospheric transmission factor in figure 7.98."
+      }
+    ]
+  },
+  {
+    "id": "prc-31",
+    "column": "right",
+    "title": "Equation 31: Slant Range Scaling",
+    "equations": [
+      "\\[\\frac{D}{D_1} = \\left(\\frac{W}{W_1}\\right)^{1/3}\\]",
+      "\\[D = D_1 \\times W^{1/3}\\]"
+    ],
+    "variables": [
+      {
+        "sym": "\\(D\\)",
+        "def": "Slant range for yield W [ft]"
+      },
+      {
+        "sym": "\\(D_1\\)",
+        "def": "Reference slant range for 1 kt yield [ft]"
+      },
+      {
+        "sym": "\\(W\\)",
+        "def": "Weapon yield [kt]"
+      },
+      {
+        "sym": "\\(W_1\\)",
+        "def": "Reference yield (1 kt) [kt]"
+      }
+    ],
+    "description": [
+      {
+        "p": "Cube root scaling law for slant range. Distances to equal overpressure scale with the cube root of yield, based on energy similarity scaling."
+      }
+    ]
+  },
+  {
+    "id": "prc-32",
+    "column": "right",
+    "title": "Equation 32: Cube Root Scaling (Multiple Parameters)",
+    "equations": [
+      "\\[d = d_1 \\times W^{1/3}\\]",
+      "\\[t = t_1 \\times W^{1/3}\\]",
+      "\\[h = h_1 \\times W^{1/3}\\]"
+    ],
+    "variables": [
+      {
+        "sym": "\\(d\\)",
+        "def": "Distance from ground zero [ft]"
+      },
+      {
+        "sym": "\\(t\\)",
+        "def": "Shock front arrival time [s]"
+      },
+      {
+        "sym": "\\(h\\)",
+        "def": "Height of burst [ft]"
+      },
+      {
+        "sym": "\\(d_1, t_1, h_1\\)",
+        "def": "Reference values for 1 kt yield"
+      },
+      {
+        "sym": "\\(W\\)",
+        "def": "Weapon yield [kt]"
+      }
+    ],
+    "description": [
+      {
+        "p": "Cube root scaling applies to various blast wave parameters including distance, time, and height, all scaling with W<sup>1/3</sup>."
+      }
+    ]
+  },
+  {
+    "id": "prc-33",
+    "column": "right",
+    "title": "Equation 33: Altitude Scaling Factors",
+    "equations": [
+      "\\[S_p = \\frac{P}{P_0}\\]",
+      "\\[S_d = \\left(\\frac{P_0}{P}\\right)^{1/3}\\]",
+      "\\[S_t = \\left(\\frac{P_0}{P}\\right)^{1/3} \\left(\\frac{T_0}{T}\\right)^{1/2}\\]"
+    ],
+    "variables": [
+      {
+        "sym": "\\(S_p\\)",
+        "def": "Pressure scaling factor [-]"
+      },
+      {
+        "sym": "\\(S_d\\)",
+        "def": "Distance scaling factor [-]"
+      },
+      {
+        "sym": "\\(S_t\\)",
+        "def": "Time scaling factor [-]"
+      },
+      {
+        "sym": "\\(P\\)",
+        "def": "Ambient pressure [psi]"
+      },
+      {
+        "sym": "\\(P_0\\)",
+        "def": "Reference pressure (sea level) [psi]"
+      },
+      {
+        "sym": "\\(T\\)",
+        "def": "Ambient temperature [K]"
+      },
+      {
+        "sym": "\\(T_0\\)",
+        "def": "Reference temperature [K]"
+      }
+    ],
+    "description": [
+      {
+        "p": "Altitude scaling factors account for atmospheric pressure and temperature variations when scaling blast effects to different altitudes or conditions. Precalculated values for various altitudes can be found in Glasstone Table 3.66."
+      }
+    ]
+  },
+  {
+    "id": "prc-34",
+    "column": "right",
+    "title": "Equation 34: Altitude Scaling Application",
+    "equations": [
+      "\\[p = p_1 S_p\\]",
+      "\\[D = D_1 W^{1/3} S_d\\]",
+      "\\[d = d_1 W^{1/3} S_d\\]",
+      "\\[t = t_1 W^{1/3} S_t\\]"
+    ],
+    "variables": [
+      {
+        "sym": "\\(p\\)",
+        "def": "Overpressure [psi]"
+      },
+      {
+        "sym": "\\(D\\)",
+        "def": "Slant range [ft]"
+      },
+      {
+        "sym": "\\(d\\)",
+        "def": "Ground distance [ft]"
+      },
+      {
+        "sym": "\\(t\\)",
+        "def": "Time [s]"
+      },
+      {
+        "sym": "\\(p_1, D_1, d_1, t_1\\)",
+        "def": "Reference values for 1 kT yield"
+      },
+      {
+        "sym": "\\(W\\)",
+        "def": "Weapon yield [kt]"
+      },
+      {
+        "sym": "\\(S_p, S_d, S_t\\)",
+        "def": "Altitude scaling factors for overpressure, distance, and time."
+      }
+    ],
+    "description": [
+      {
+        "p": "Application of altitude scaling factors combined with cube root yield scaling to predict blast parameters at different yields and atmospheric conditions."
+      }
+    ]
+  },
+  {
+    "id": "prc-35",
+    "column": "right",
+    "title": "Equation 35: Underground Burst Scaling",
+    "equations": [
+      "\\[DOB_1 = \\frac{DOB}{W^{0.3}}\\]",
+      "\\[R_a \\approx R_{a1} W^{0.3}\\]",
+      "\\[D_a \\approx D_{a1} W^{0.3}\\]"
+    ],
+    "variables": [
+      {
+        "sym": "\\(DOB\\)",
+        "def": "Actual depth of burst [ft]"
+      },
+      {
+        "sym": "\\(DOB_1\\)",
+        "def": "Scaled depth of burst (equivalent depth for a 1 kt yield) [ft]"
+      },
+      {
+        "sym": "\\(R_a\\)",
+        "def": "Apparent crater radius [ft]"
+      },
+      {
+        "sym": "\\(R_{a1}\\)",
+        "def": "Reference crater radius [ft]"
+      },
+      {
+        "sym": "\\(D_a\\)",
+        "def": "Apparent crater depth [ft]"
+      },
+      {
+        "sym": "\\(D_{a1}\\)",
+        "def": "Reference crater depth [ft]"
+      },
+      {
+        "sym": "\\(W\\)",
+        "def": "Weapon yield [kt]"
+      }
+    ],
+    "description": [
+      {
+        "p": "Scaling laws for underground bursts use W<sup>0.3</sup> rather than W<sup>1/3</sup> due to different physics governing crater formation in soil and rock."
+      }
+    ]
+  },
+  {
+    "id": "prc-36",
+    "column": "right",
+    "title": "Equation 36: Crater Volume",
+    "equations": [
+      "\\[V = \\frac{1}{2} \\pi R_a^2 D_a\\]"
+    ],
+    "variables": [
+      {
+        "sym": "\\(V\\)",
+        "def": "Apparent crater volume [ft<sup>3</sup>]"
+      },
+      {
+        "sym": "\\(R_a\\)",
+        "def": "Apparent crater radius [ft]"
+      },
+      {
+        "sym": "\\(D_a\\)",
+        "def": "Apparent crater depth [ft]"
+      }
+    ],
+    "description": [
+      {
+        "p": "Volume of the apparent crater formed by an underground burst, approximated as a paraboloid of revolution with the given radius and depth. A paraboloid has half the volume of the cylinder that encloses it, which is where the factor of 1/2 comes from."
+      }
+    ]
+  },
+  {
+    "id": "prc-37",
+    "column": "right",
+    "title": "Equation 37: Additional Crater Dimensions",
+    "equations": [
+      "\\[R_{al} = 1.25 R_a\\]",
+      "\\[D_{al} = 1.25 D_a\\]",
+      "\\[H_{al} = 0.25 D_a\\]",
+      "\\[R_e = 2.15 R_a\\]"
+    ],
+    "variables": [
+      {
+        "sym": "\\(R_{al}\\)",
+        "def": "Apparent lip radius [ft]"
+      },
+      {
+        "sym": "\\(D_{al}\\)",
+        "def": "Apparent lip depth [ft]"
+      },
+      {
+        "sym": "\\(H_{al}\\)",
+        "def": "Apparent lip height [ft]"
+      },
+      {
+        "sym": "\\(R_e\\)",
+        "def": "Ejecta radius [ft]"
+      },
+      {
+        "sym": "\\(R_a\\)",
+        "def": "Apparent crater radius [ft]"
+      },
+      {
+        "sym": "\\(D_a\\)",
+        "def": "Apparent crater depth [ft]"
+      }
+    ],
+    "description": [
+      {
+        "p": "Empirical relationships for additional crater features including the lip dimensions and extent of ejecta, all related to the basic crater dimensions."
+      }
+    ]
+  },
+  {
+    "id": "prc-38-1",
+    "column": "left",
+    "title": "Equation 38: Initial Radiation Dose",
+    "equations": [
+      "\\[D = D_n + D_{\\gamma s} + D_{\\gamma f}\\]"
+    ],
+    "variables": [
+      {
+        "sym": "\\(D\\)",
+        "def": "Total absorbed dose [Gy or rad]"
+      },
+      {
+        "sym": "\\(D_n\\)",
+        "def": "Neutron absorbed dose [Gy or rad]"
+      },
+      {
+        "sym": "\\(D_{\\gamma s}\\)",
+        "def": "Secondary gamma absorbed dose [Gy or rad]"
+      },
+      {
+        "sym": "\\(D_{\\gamma f}\\)",
+        "def": "Fission fragment gamma absorbed dose [Gy or rad]"
+      }
+    ],
+    "description": [
+      {
+        "p": "Initial radiation dose from a nuclear detonation consists of neutron, secondary gamma, and fission gamma contributions."
+      }
+    ]
+  },
+  {
+    "id": "prc-38-2",
+    "column": "left",
+    "title": "Equation 38: Initial Radiation Dose Equivalent",
+    "equations": [
+      "\\[H = DQ\\]"
+    ],
+    "variables": [
+      {
+        "sym": "\\(D\\)",
+        "def": "Total absorbed dose [Gy or rad]"
+      },
+      {
+        "sym": "\\(H\\)",
+        "def": "Dose equivalent [Sv or rem]"
+      },
+      {
+        "sym": "\\(Q\\)",
+        "def": "Quality factor [-]"
+      }
+    ],
+    "description": [
+      {
+        "p": "Dose equivalent accounts for biological effectiveness through the quality factor. For gamma and beta radiation Q ≈ 1, while for neutrons Q ranges from 5-20 depending on energy. 1 rem = 0.01 Sv; 1 rad = 0.01 Gy."
+      }
+    ]
+  },
+  {
+    "id": "prc-39",
+    "column": "left",
+    "title": "Equation 39: Residual Radiation Decay",
+    "equations": [
+      "\\[\\dot{D}_t \\approx \\dot{D}_1 t^{-1.2}\\]"
+    ],
+    "variables": [
+      {
+        "sym": "\\(\\dot{D}_t\\)",
+        "def": "Dose rate at time t [rad/hr]"
+      },
+      {
+        "sym": "\\(\\dot{D}_1\\)",
+        "def": "Dose rate at t = 1 hour (unit time reference dose rate) [rad/hr]"
+      },
+      {
+        "sym": "\\(t\\)",
+        "def": "Time after detonation [hours]"
+      }
+    ],
+    "description": [
+      {
+        "p": "The \"7/10\" rule describes the decay of residual radiation (fallout) dose rate following a nuclear detonation. This empirical relationship holds reasonably well from about 1 hour to 6 months after the event."
+      }
+    ]
+  },
+  {
+    "id": "prc-40",
+    "column": "left",
+    "title": "Equation 40: Integrated Residual Dose",
+    "equations": [
+      "\\[D \\approx \\dot{D}_1 \\int_{t_a}^{t_b} t^{-1.2} \\, dt\\]",
+      "\\[D \\approx 5\\dot{D}_1 \\left( t_a^{-0.2} - t_b^{-0.2} \\right)\\]"
+    ],
+    "variables": [
+      {
+        "sym": "\\(D\\)",
+        "def": "Integrated dose between times \\(t_a\\) and \\(t_b\\) [rads]"
+      },
+      {
+        "sym": "\\(\\dot{D}_1\\)",
+        "def": "Dose rate at t = 1 hour (unit time reference dose rate) [rad/hr]"
+      },
+      {
+        "sym": "\\(t_a\\)",
+        "def": "Start time [hours]"
+      },
+      {
+        "sym": "\\(t_b\\)",
+        "def": "End time [hours]"
+      }
+    ],
+    "description": [
+      {
+        "p": "Integration of the residual radiation decay law to determine total accumulated dose between two times. The factor of 5 comes from integrating t<sup>-1.2</sup>."
+      }
+    ]
+  },
+  {
+    "id": "prc-41",
+    "column": "left",
+    "title": "Equation 41: Exponential Attenuation",
+    "equations": [
+      "\\[I = I_0 e^{-\\mu x}\\]"
+    ],
+    "variables": [
+      {
+        "sym": "\\(I\\)",
+        "def": "Transmitted intensity [particles/cm<sup>2</sup>&sdot;s]"
+      },
+      {
+        "sym": "\\(I_0\\)",
+        "def": "Initial intensity [particles/cm<sup>2</sup>&sdot;s]"
+      },
+      {
+        "sym": "\\(\\mu\\)",
+        "def": "Linear attenuation coefficient [cm<sup>-1</sup>]"
+      },
+      {
+        "sym": "\\(x\\)",
+        "def": "Material thickness [cm]"
+      }
+    ],
+    "description": [
+      {
+        "p": "Beer-Lambert law describing exponential attenuation of radiation passing through matter. Applies to uncollided (narrow beam) radiation."
+      }
+    ]
+  },
+  {
+    "id": "prc-42",
+    "column": "left",
+    "title": "Equation 42: Mass Attenuation Coefficient (Mixture)",
+    "equations": [
+      "\\[\\frac{\\mu}{\\rho} = \\sum_{i=1}^{n} \\omega_i \\left(\\frac{\\mu}{\\rho}\\right)_i \\quad \\left[\\frac{\\text{cm}^2}{\\text{g}}\\right]\\]"
+    ],
+    "variables": [
+      {
+        "sym": "\\(\\mu/\\rho\\)",
+        "def": "Mass attenuation coefficient of mixture [cm<sup>2</sup>/g]"
+      },
+      {
+        "sym": "\\(\\omega_i\\)",
+        "def": "Weight fraction of component i [-]"
+      },
+      {
+        "sym": "\\((\\mu/\\rho)_i\\)",
+        "def": "Mass attenuation coefficient of component i [cm<sup>2</sup>/g]"
+      },
+      {
+        "sym": "\\(n\\)",
+        "def": "Number of components [-]"
+      }
+    ],
+    "description": [
+      {
+        "p": "Mixture rule for calculating mass attenuation coefficients from constituent materials weighted by their mass fractions."
+      }
+    ]
+  },
+  {
+    "id": "prc-43-1",
+    "column": "left",
+    "title": "Equation 43-1: Linear Attenuation Coefficient",
+    "equations": [
+      "\\[\\mu = N\\sigma\\]"
+    ],
+    "variables": [
+      {
+        "sym": "\\(\\mu\\)",
+        "def": "Linear attenuation coefficient [cm<sup>-1</sup>]"
+      },
+      {
+        "sym": "\\(N\\)",
+        "def": "Number density [atoms/cm<sup>3</sup>]"
+      },
+      {
+        "sym": "\\(\\sigma\\)",
+        "def": "Microscopic cross section [cm<sup>2</sup>]"
+      }
+    ],
+    "description": [
+      {
+        "p": "Relationship between photon linear attentuation coefficient and microscopic cross sections. 1 barn = 10<sup>-24</sup> cm<sup>2</sup>."
+      }
+    ]
+  },
+  {
+    "id": "prc-43-2",
+    "column": "left",
+    "title": "Equation 43-2: Mean Free Path",
+    "equations": [
+      "\\[\\lambda = \\frac{1}{\\mu}\\]"
+    ],
+    "variables": [
+      {
+        "sym": "\\(\\mu\\)",
+        "def": "Linear attenuation coefficient [cm<sup>-1</sup>]"
+      },
+      {
+        "sym": "\\(\\lambda\\)",
+        "def": "Mean free path [cm]"
+      }
+    ],
+    "description": [
+      {
+        "p": "The definition of mean free path is the inverse of the linear attenuation coefficient."
+      }
+    ]
+  },
+  {
+    "id": "prc-44-1",
+    "column": "left",
+    "title": "Equation 44-1: Number Density",
+    "equations": [
+      "\\[N = \\frac{\\rho N_A}{M}\\]"
+    ],
+    "variables": [
+      {
+        "sym": "\\(N\\)",
+        "def": "Number density [atoms/cm<sup>3</sup>]"
+      },
+      {
+        "sym": "\\(\\rho\\)",
+        "def": "Mass density [g/cm<sup>3</sup>]"
+      },
+      {
+        "sym": "\\(N_A\\)",
+        "def": "Avogadro's number [atoms/mol]"
+      },
+      {
+        "sym": "\\(M\\)",
+        "def": "Atomic or molecular mass [g/mol]"
+      }
+    ],
+    "description": [
+      {
+        "p": "Calculation of number density from mass density and atomic mass."
+      }
+    ]
+  },
+  {
+    "id": "prc-44-2",
+    "column": "left",
+    "title": "Equation 44-2: Macroscopic Cross Section",
+    "equations": [
+      "\\[\\Sigma = N\\sigma\\]"
+    ],
+    "variables": [
+      {
+        "sym": "\\(\\Sigma\\)",
+        "def": "Macroscopic cross section [cm<sup>-1</sup>]"
+      },
+      {
+        "sym": "\\(N\\)",
+        "def": "Number density [atoms/cm<sup>3</sup>]"
+      },
+      {
+        "sym": "\\(\\sigma\\)",
+        "def": "Microscopic cross section [cm<sup>2</sup>]"
+      }
+    ],
+    "description": [
+      {
+        "p": "Calculation of neutron macroscopic cross section from number density and microscopic cross section."
+      }
+    ]
+  }
+]
