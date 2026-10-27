@@ -25,7 +25,7 @@
       },
       {
         "sym": "\\(V(x_i)\\)",
-        "def": "Separation potential \\(x_i\\) [SWU]"
+        "def": "Separation potential (value function) at enrichment \\(x_i\\) [-]; multiplied by a mass it gives kg-SWU"
       },
       {
         "sym": "\\(x_p\\)",
@@ -130,7 +130,7 @@
     "variables": [
       {
         "sym": "\\(V(x_i)\\)",
-        "def": "Value function at enrichment \\(x_i\\) [SWU]"
+        "def": "Separation potential (value function) at enrichment \\(x_i\\) [-]"
       },
       {
         "sym": "\\(x_i\\)",
@@ -139,7 +139,7 @@
     ],
     "description": [
       {
-        "p": "The value function quantifies the separative work content of material at a given enrichment level. It appears in the SWU calculation and represents the difficulty of achieving a particular enrichment. The separation potential will need to be found for all three streams (feed, product, and waste) when calculating SWU."
+        "p": "The separation potential (also called the value function) quantifies the separative work content of material at a given enrichment level. It appears in the SWU calculation and represents the difficulty of achieving a particular enrichment. The separation potential will need to be found for all three streams (feed, product, and waste) when calculating SWU. V itself is dimensionless; the [SWU] label means it gives separative work per kg of material."
       }
     ]
   },
@@ -197,7 +197,7 @@
     ],
     "description": [
       {
-        "p": "The gaseous diffusion seperation factor is based on the square root of the mass ratio of molecules being seperated. This only applies to gaseous diffusion."
+        "p": "The gaseous diffusion separation factor is based on the square root of the mass ratio of molecules being separated. This only applies to gaseous diffusion."
       }
     ]
   },
@@ -215,11 +215,11 @@
       },
       {
         "sym": "\\(m_H\\)",
-        "def": "Mass of heavy molecule [kg/mol]"
+        "def": "Molar mass of heavy molecule [kg/mol]"
       },
       {
         "sym": "\\(m_L\\)",
-        "def": "Mass of light molecule [kg/mol]"
+        "def": "Molar mass of light molecule [kg/mol]"
       },
       {
         "sym": "\\(\\omega\\)",
@@ -359,6 +359,9 @@
     "description": [
       {
         "p": "The multiplication rate (also called bomb alpha) determines the exponential rate of change of neutron population in a fissioning weapon core. Positive values indicate a supercritical state with increasing neutron population, whereas negative values indicate a subcritical state with decreasing neutron population."
+      },
+      {
+        "p": "This \\(\\alpha\\) is a rate, not the separation factor \\(\\alpha\\) of Equations 4-6."
       }
     ]
   },
@@ -403,7 +406,7 @@
     "variables": [
       {
         "sym": "\\(Y(t)\\)",
-        "def": "Energy yield at time t [MeV or kT]"
+        "def": "Energy yield at time t [MeV or kt]"
       },
       {
         "sym": "\\(\\Sigma_f\\)",
@@ -415,7 +418,7 @@
       },
       {
         "sym": "\\(Q\\)",
-        "def": "Energy per fission [MeV or kT]"
+        "def": "Energy per fission [MeV or kt]"
       },
       {
         "sym": "\\(N_0\\)",
@@ -432,7 +435,7 @@
     ],
     "description": [
       {
-        "p": "Energy yield describes the exponential growth (or decay) of accumulated energy yield in a fissioning system over time."
+        "p": "Accumulated energy yield grows exponentially with time in a supercritical system (\\(\\alpha > 0\\)). If \\(\\alpha < 0\\) the yield does not decay; it levels off at \\(\\Sigma_f v Q N_0/|\\alpha|\\). The equation assumes \\(\\Sigma_f\\) and \\(\\alpha\\) stay constant (no expansion or burnup)."
       }
     ]
   },
@@ -554,7 +557,7 @@
     "variables": [
       {
         "sym": "\\(Y\\)",
-        "def": "Total energy yield [kT or MeV]"
+        "def": "Total energy yield [kt or MeV]"
       },
       {
         "sym": "\\(N_{reac}\\)",
@@ -562,7 +565,7 @@
       },
       {
         "sym": "\\(Q\\)",
-        "def": "Energy per fusion reaction [kT or MeV]"
+        "def": "Energy per fusion reaction [kt or MeV]"
       }
     ],
     "description": [
@@ -588,11 +591,11 @@
       },
       {
         "sym": "\\(r\\)",
-        "def": "Radius of fusion sphere [m]"
+        "def": "Radius of fusion sphere [cm]"
       },
       {
         "sym": "\\(n_{tar}\\)",
-        "def": "Number density of target particles [targets/m<sup>3</sup>]"
+        "def": "Number density of target particles [targets/cm<sup>3</sup>]"
       },
       {
         "sym": "\\(Q\\)",
@@ -619,7 +622,7 @@
       },
       {
         "sym": "\\((\\overline{\\sigma v})\\)",
-        "def": "Reactivity (fusion cross section) [cm<sup>3</sup>/s]"
+        "def": "Reactivity: the product of cross section and relative speed, averaged over the (Maxwellian) speed distribution [cm<sup>3</sup>/s]"
       },
       {
         "sym": "\\(n_{tar}\\)",
@@ -677,11 +680,11 @@
     "column": "left",
     "title": "Equation 17: D-D Fusion Reactivity",
     "equations": [
-      "\\[\\langle \\sigma v \\rangle_{DD} = 2.33 \\times 10^{-14} E^{-2/3} e^{-18.76 E^{-1/3}}\\]"
+      "\\[(\\overline{\\sigma v})_{DD} = 2.33 \\times 10^{-14} E^{-2/3} e^{-18.76 E^{-1/3}}\\]"
     ],
     "variables": [
       {
-        "sym": "\\(\\langle \\sigma v \\rangle_{DD}\\)",
+        "sym": "\\((\\overline{\\sigma v})_{DD}\\)",
         "def": "D-D reactivity [cm<sup>3</sup>/s]"
       },
       {
@@ -700,11 +703,11 @@
     "column": "left",
     "title": "Equation 18: D-T Fusion Reactivity",
     "equations": [
-      "\\[\\langle \\sigma v \\rangle_{DT} = 3.68 \\times 10^{-12} E^{-2/3} e^{-19.94 E^{-1/3}}\\]"
+      "\\[(\\overline{\\sigma v})_{DT} = 3.68 \\times 10^{-12} E^{-2/3} e^{-19.94 E^{-1/3}}\\]"
     ],
     "variables": [
       {
-        "sym": "\\(\\langle \\sigma v \\rangle_{DT}\\)",
+        "sym": "\\((\\overline{\\sigma v})_{DT}\\)",
         "def": "D-T reactivity [cm<sup>3</sup>/s]"
       },
       {
@@ -916,7 +919,7 @@
     ],
     "description": [
       {
-        "p": "Pressure generated in a material by X-ray energy deposition. The deposited energy per unit mass, multiplied by density, gives the pressure impulse."
+        "p": "Pressure generated in a material by X-ray energy deposition. The deposited energy per unit mass, multiplied by density, gives the pressure."
       },
       {
         "p": "This assumes the energy is deposited instantaneously (before the material can expand) and a Gr&uuml;neisen parameter \\(\\Gamma = 1\\). The more general form is \\(p = \\Gamma \\rho_0 E_{dep}\\), where \\(\\Gamma\\) depends on the material."
@@ -949,7 +952,7 @@
     ],
     "description": [
       {
-        "p": "Empirical scaling laws for fireball dimensions at different stages of growth. The coefficients represent different times: radius at thermal minimum, radius at breakaway (air burst), radius at breakaway (surface burst). The fourth equation gives the maximum burst height where local fallout will be produced."
+        "p": "Empirical scaling laws for fireball dimensions. The first gives the radius at the thermal minimum; the second and third give the radius at breakaway for an air burst and for a contact surface burst (these two differ by burst geometry, not by time). The fourth gives the maximum burst height at which local fallout will be produced."
       }
     ]
   },
@@ -958,12 +961,12 @@
     "column": "right",
     "title": "Equation 25-1: Max Thermal Power under 15,000 ft",
     "equations": [
-      "\\[P_{max} \\approx 3.18 W^{0.56} \\quad \\text{[kT/s]}\\]"
+      "\\[P_{max} \\approx 3.18 W^{0.56} \\quad \\text{[kt/s]}\\]"
     ],
     "variables": [
       {
         "sym": "\\(P_{max}\\)",
-        "def": "Maximum thermal power [kT/s]"
+        "def": "Maximum thermal power [kt/s]"
       },
       {
         "sym": "\\(W\\)",
@@ -1004,12 +1007,12 @@
     "column": "right",
     "title": "Equation 26-1: Max Thermal Power above 15,000 ft",
     "equations": [
-      "\\[P_{max} = \\frac{3.56 W^{0.59}}{[\\rho(h)/\\rho_0]^{0.45}} \\quad \\text{[kT/s]}\\]"
+      "\\[P_{max} = \\frac{3.56 W^{0.59}}{[\\rho(h)/\\rho_0]^{0.45}} \\quad \\text{[kt/s]}\\]"
     ],
     "variables": [
       {
         "sym": "\\(P_{max}\\)",
-        "def": "Maximum thermal power [kT/s]"
+        "def": "Maximum thermal power [kt/s]"
       },
       {
         "sym": "\\(W\\)",
@@ -1110,7 +1113,7 @@
       },
       {
         "sym": "\\(\\tau\\)",
-        "def": "Atmospheric transmission factor [-]"
+        "def": "Atmospheric transmission factor (transmittance) [-]; not the time period \\(\\tau\\) of Equation 1"
       },
       {
         "sym": "\\(D\\)",
@@ -1145,7 +1148,7 @@
       },
       {
         "sym": "\\(\\tau\\)",
-        "def": "Atmospheric transmission factor [-]"
+        "def": "Atmospheric transmission factor (transmittance) [-]; not the time period \\(\\tau\\) of Equation 1"
       },
       {
         "sym": "\\(D\\)",
@@ -1180,7 +1183,7 @@
       },
       {
         "sym": "\\(\\tau\\)",
-        "def": "Atmospheric transmission factor [-]"
+        "def": "Atmospheric transmission factor (transmittance) [-]; not the time period \\(\\tau\\) of Equation 1"
       },
       {
         "sym": "\\(D\\)",
@@ -1249,7 +1252,7 @@
       },
       {
         "sym": "\\(d_1, t_1, h_1\\)",
-        "def": "Reference values for 1 kt yield"
+        "def": "Reference values for a 1 kt yield [ft, s, ft]"
       },
       {
         "sym": "\\(W\\)",
@@ -1336,7 +1339,7 @@
       },
       {
         "sym": "\\(p_1, D_1, d_1, t_1\\)",
-        "def": "Reference values for 1 kT yield"
+        "def": "Reference values for a 1 kt burst at sea level [psi, ft, ft, s]"
       },
       {
         "sym": "\\(W\\)",
@@ -1350,6 +1353,9 @@
     "description": [
       {
         "p": "Application of altitude scaling factors combined with cube root yield scaling to predict blast parameters at different yields and atmospheric conditions."
+      },
+      {
+        "p": "Height of burst scales the same way as distance: \\(h = h_1 W^{1/3} S_d\\)."
       }
     ]
   },
@@ -1394,7 +1400,7 @@
     ],
     "description": [
       {
-        "p": "Scaling laws for underground bursts use W<sup>0.3</sup> rather than W<sup>1/3</sup> due to different physics governing crater formation in soil and rock."
+        "p": "Scaling laws for underground bursts use W<sup>0.3</sup> rather than W<sup>1/3</sup> because crater material must be lifted out against gravity. That work does not scale like the blast energy, so crater dimensions grow more slowly than cube-root scaling would predict."
       }
     ]
   },
@@ -1548,7 +1554,7 @@
     ],
     "description": [
       {
-        "p": "The \"7/10\" rule describes the decay of residual radiation (fallout) dose rate following a nuclear detonation. This empirical relationship holds reasonably well from about 1 hour to 6 months after the event."
+        "p": "This \\(t^{-1.2}\\) law describes the decay of residual radiation (fallout) dose rate following a nuclear detonation. The \"7:10 rule\" follows from it: every 7-fold increase in time cuts the dose rate by a factor of 10. The law is accurate to within roughly 25% for the first couple of weeks and within about a factor of 2 out to about 6 months."
       }
     ]
   },
@@ -1629,7 +1635,7 @@
       },
       {
         "sym": "\\(\\omega_i\\)",
-        "def": "Weight fraction of component i [-]"
+        "def": "Weight fraction of component i [-]; not the angular velocity \\(\\omega\\) of Equation 6"
       },
       {
         "sym": "\\((\\mu/\\rho)_i\\)",
@@ -1669,7 +1675,7 @@
     ],
     "description": [
       {
-        "p": "Relationship between photon linear attentuation coefficient and microscopic cross sections. 1 barn = 10<sup>-24</sup> cm<sup>2</sup>."
+        "p": "Relationship between photon linear attenuation coefficient and microscopic cross sections. 1 barn = 10<sup>-24</sup> cm<sup>2</sup>."
       }
     ]
   },
