@@ -289,6 +289,9 @@
     "description": [
       {
         "p": "The infinite multiplication factor represents neutron multiplication in an infinite medium. The effective multiplication factor accounts for neutron leakage in finite systems."
+      },
+      {
+        "p": "The second form, using microscopic cross sections, only holds when the fuel is a single nuclide. For a mixture (e.g., HEU containing both U-235 and U-238), sum over each nuclide i: \\(k_\\infty = \\sum_i \\nu_i N_i \\sigma_{f,i} \\,/\\, \\sum_i N_i \\sigma_{a,i}\\)."
       }
     ]
   },
@@ -535,6 +538,9 @@
     "description": [
       {
         "p": "This equation is an approximation for the non-leakage factor of a fissioning sphere of plutonium, based on data from Bridgman. It is ONLY a valid approximation for plutonium."
+      },
+      {
+        "p": "Because this is a curve fit, only use it within the range of masses and compressions covered by the source data. Outside that range it gives non-physical results: for example, at \\(C = 1\\) it goes negative for \\(m < 1\\) kg because \\(\\ln m < 0\\)."
       }
     ]
   },
@@ -562,6 +568,9 @@
     "description": [
       {
         "p": "The total energy released from fusion is simply the number of reactions multiplied by the energy released per reaction."
+      },
+      {
+        "p": "\\(Q_{DD} = 9.96\\) MeV (footnote to the thermonuclear reactions table) is an effective Q-value for D-D burning. It assumes the two D-D branches occur equally often and that the tritium from \\(D + D \\rightarrow T + H\\) also burns with deuterium, while the \\(^3\\text{He}\\) from \\(D + D \\rightarrow {}^3\\text{He} + n\\) does not: 4.03 + 3.27 + 17.6 = 24.9 MeV from 5 deuterons, or 4.98 MeV per deuteron. \\(Q_{DD}\\) is that per-deuteron average multiplied by 2, i.e. the energy per D-D reaction when the tritium burn is included."
       }
     ]
   },
@@ -623,13 +632,16 @@
     ],
     "description": [
       {
-        "p": "Reaction rate density for fusion between two species."
+        "p": "Reaction rate density for fusion between two different species (e.g., D-T)."
       },
       {
-        "p": "Note: for like-species fusion, such as D-D, there is no longer a distinction between targets and bombarding nuclei. This will increase reaction rate density by a factor of 2, such that:"
+        "p": "Note: for like-species fusion (D-D), every deuteron can act as either target or bombarder, and each pair may only be counted once, so the rate is \\(\\hat{R} = \\tfrac{1}{2}(\\overline{\\sigma v}) n_D^2\\). If you follow Equation 16-2 and split the deuterium into equal target and bombarding halves (\\(n_{tar} = n_{bomb} = n_D/2\\)), this is the same as multiplying Equation 16-1 by 2:"
       },
       {
-        "eq": "\\[\\hat{R}\\ = 2(\\overline{\\sigma v}) n_{tar} n_{bomb}\\]"
+        "eq": "\\[\\hat{R} = \\tfrac{1}{2}(\\overline{\\sigma v}) n_D^2 = 2(\\overline{\\sigma v}) n_{tar} n_{bomb}\\]"
+      },
+      {
+        "p": "Use one form or the other. Setting \\(n_{tar} = n_{bomb} = n_D\\) and also applying the factor of 2 overcounts the rate by a factor of 4."
       }
     ]
   },
@@ -656,7 +668,7 @@
     ],
     "description": [
       {
-        "p": "If the bombarding and target nuclei are in equal ratio, such as D-D reactions or balanced D-T reactions, each species has equal number density at half the total number density."
+        "p": "If the bombarding and target nuclei are in equal ratio, such as D-D reactions or balanced D-T reactions, each species has equal number density at half the total number density. For D-D, remember the factor of 2 in Equation 16-1 when using these halves."
       }
     ]
   },
@@ -809,7 +821,7 @@
     "variables": [
       {
         "sym": "\\(P_g\\)",
-        "def": "Fraction of blackbody radiation in energy group g [1/keV]"
+        "def": "Fraction of blackbody radiation energy in energy group g [-]"
       },
       {
         "sym": "\\(h\\nu\\)",
@@ -905,6 +917,9 @@
     "description": [
       {
         "p": "Pressure generated in a material by X-ray energy deposition. The deposited energy per unit mass, multiplied by density, gives the pressure impulse."
+      },
+      {
+        "p": "This assumes the energy is deposited instantaneously (before the material can expand) and a Gr&uuml;neisen parameter \\(\\Gamma = 1\\). The more general form is \\(p = \\Gamma \\rho_0 E_{dep}\\), where \\(\\Gamma\\) depends on the material."
       }
     ]
   },
@@ -1350,11 +1365,11 @@
     "variables": [
       {
         "sym": "\\(DOB\\)",
-        "def": "Scaled depth of burst [ft]"
+        "def": "Actual depth of burst [ft]"
       },
       {
         "sym": "\\(DOB_1\\)",
-        "def": "Reference depth of burst for 1 kT yield [ft]"
+        "def": "Scaled depth of burst (equivalent depth for a 1 kt yield) [ft]"
       },
       {
         "sym": "\\(R_a\\)",
@@ -1406,7 +1421,7 @@
     ],
     "description": [
       {
-        "p": "Volume of the apparent crater formed by an underground burst, approximated as half of a paraboloid of revolution with the given radius and depth."
+        "p": "Volume of the apparent crater formed by an underground burst, approximated as a paraboloid of revolution with the given radius and depth. A paraboloid has half the volume of the cylinder that encloses it, which is where the factor of 1/2 comes from."
       }
     ]
   },
