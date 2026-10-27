@@ -1,0 +1,139 @@
+/*
+ * Shared styles for the interactive reference cards.
+ * This file is identical in iRDC300, iRDC450, iFNEK and iFNEK_C; copy it unchanged between them.
+ * Site-specific popup content styles stay in each index.html.
+ */
+
+/* Page styling */
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 100%;
+    margin: 0;
+    padding: 20px;
+}
+
+/* Container styling */
+#rdcContainer {
+    display: flex;
+    justify-content: center;
+    max-width: 100%;
+    overflow-x: auto;
+}
+
+/* Popup styling */
+#equationPopup {
+    display: none;
+    position: absolute;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    padding: 20px;
+    z-index: 1000;
+    min-width: 300px;
+    max-width: 600px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    border-radius: 4px;
+    overflow-x: auto;
+}
+
+#latexContent {
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+#latexContent .equation {
+    padding: 15px;
+    margin: 10px 0;
+    background-color: #f8f9fa;
+    border-radius: 4px;
+    overflow-x: auto;
+}
+
+#latexContent h1 {
+    font-size: 1.2em;
+    margin: 0 0 15px 0;
+    padding-right: 60px; /* keep long titles clear of the Close button */
+}
+
+#latexContent h2 {
+    font-size: 1.1em;
+    margin: 15px 0 8px 0;
+}
+
+#latexContent ul {
+    margin: 8px 0;
+    padding-left: 25px;
+}
+
+#latexContent li {
+    margin: 4px 0;
+}
+
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    cursor: pointer;
+    font: inherit;
+    font-size: 14px;
+    color: #e74c3c;
+    background: none;
+    border: none;
+    transition: color 0.3s ease;
+    padding: 5px;
+}
+
+.close-btn:hover {
+    color: #c0392b;
+}
+
+.warning {
+    color: #e74c3c;
+    font-weight: bold;
+    text-align: center;
+}
+
+/* Clickable hotspots drawn in the SVG (marked by irdc.js from the data file) */
+#rdcContainer [data-hotspot] {
+    fill: transparent;
+    stroke: none;
+    cursor: pointer;
+}
+
+#rdcContainer [data-hotspot]:hover,
+#rdcContainer [data-hotspot]:focus-visible {
+    fill: rgba(255, 215, 0, 0.25);
+}
+
+#rdcContainer [data-hotspot]:focus-visible {
+    outline: 2px solid #b8860b;
+}
+
+/* Phones: keep the card at full size and scroll it sideways, and show the popup as a sheet along the bottom */
+@media (max-width: 700px) {
+    body {
+        padding: 12px;
+        align-items: stretch;
+    }
+
+    #rdcContainer {
+        justify-content: flex-start;
+    }
+
+    #rdcContainer svg {
+        flex: none;
+    }
+
+    #equationPopup {
+        position: fixed;
+        top: auto !important;
+        left: 8px !important;
+        right: 8px;
+        bottom: 8px;
+        min-width: 0;
+        max-width: none;
+        max-height: 60vh;
+        overflow-y: auto;
+    }
+}

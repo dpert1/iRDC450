@@ -5,3 +5,9 @@
 
 /equations.json
   Cache-Control: public, max-age=3600
+
+/irdc.js
+  Cache-Control: public, max-age=3600
+
+/irdc.css
+  Cache-Control: public, max-age=3600
