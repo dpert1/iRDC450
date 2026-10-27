@@ -1,0 +1,7 @@
+# Netlify cache rules. The default (max-age=0) makes every visit re-request each file.
+# These files are not fingerprinted, so keep lifetimes short enough that card fixes reach cadets the same day.
+/NE450_RDC_Both.svg
+  Cache-Control: public, max-age=86400
+
+/equations.json
+  Cache-Control: public, max-age=3600
